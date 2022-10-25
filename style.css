@@ -11,11 +11,14 @@
     top: 2%;
     left: 55px;
     z-index: 30000;
-    background-color: rgba(255, 255, 255, 0.5);
+    /* background-color: rgba(255, 255, 255, 0.5); */
+
+    background-image:linear-gradient(  rgb(0,0,0), yellow);
+
     /* the height container, depending on its content, can be more than 25px. 
     But when it has no content, it has to be 25px */
     min-height: 25px;
-    width: 700px;
+    width: 500px;
     padding-top: 15px;
     padding-bottom: 10px;
     padding-left: 10px;
