@@ -12,7 +12,7 @@ const headers = {
 
 // this is a global function
 // therefore other JS files can  make use of it
-async function search(ll, search, radius, category = "") {
+async function search(ll, search = "", radius, category = "") {
   let url = API_BASE_URL + "search";
   let response = await axios.get(url, {
     headers: headers,
@@ -20,7 +20,7 @@ async function search(ll, search, radius, category = "") {
       ll: ll,
       query: search,
       radius: radius,
-      category: category, // ok for category to be empty string
+      categories: category, // ok for category to be empty string
       limit: 50,
       v: "20210903", // (Unique FourSquare) YYMMDD format (its for version control). I want to use your version of API dated before this date
     },
