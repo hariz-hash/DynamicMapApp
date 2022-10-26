@@ -10,28 +10,28 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     // icon for ART_MUSEUM=====================================
     let artMuseumIcon = L.icon({
-      iconUrl: 'img/art.png',
+      iconUrl: 'img/ArtMuseum.png',
       iconSize: [38, 95],
     });
     //// icon for ART_MUSEUM=====================================
     //---------------------------------------------------------------------//
-  
+
     //// icon for HISTORY_MUSEUM=====================================
     let historyMuseumIcon = L.icon({
-      iconUrl: 'img/history.png',
+      iconUrl: 'img/historyMuseum.png',
       iconSize: [38, 95],
     });
     //// icon for HISTORY_MUSEUM=====================================
     //---------------------------------------------------------------------//
-  
+
     //// icon for SCIENCE_MUSEUM=====================================
     let scienceMuseumIcon = L.icon({
-      iconUrl: 'img/SCIENC.png',
+      iconUrl: 'img/scienceMuseum.png',
       iconSize: [38, 95],
     });
     //// icon for SCIENCE_MUSEUM=====================================
     //---------------------------------------------------------------------//
-//12=========================================================================================
+    //12=========================================================================================
 
     document
       .querySelector("#btnToggleSearch")
@@ -65,20 +65,23 @@ window.addEventListener("DOMContentLoaded", async function () {
         for (let rb of museum) {
           if (rb.checked) {
             valueBtn = rb.value;
+       
           }
         }
 
+        
         let searchResults = await search(latLng, searchTerms, 5000, valueBtn);
-        let radioButtonMuseum = await search(latLng);
         let searchResultElement = document.querySelector("#results");
         searchResultElement.innerHTML = "";
 
-        
+
         for (let r of searchResults.results) {
           console.log(r);
+         
           // Display the marker
           let lat = r.geocodes.main.latitude;
           let lng = r.geocodes.main.longitude;
+
           let marker = L.marker([lat, lng]).addTo(searchResultLayer);
           // marker.bindPopup(`<h1>${r.name}</h1>`)
 
@@ -121,6 +124,8 @@ window.addEventListener("DOMContentLoaded", async function () {
 
           searchResultElement.appendChild(resultElement);
         }
+
+
       });
 
 
