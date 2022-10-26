@@ -12,7 +12,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     // icon for ART_MUSEUM=====================================
     let artMuseumIcon = L.icon({
       iconUrl: 'img/ArtMuseum.png',
-      iconSize: [50, 50],
+      iconSize: [35, 35],
     });
     //// icon for ART_MUSEUM=====================================
     //---------------------------------------------------------------------//
@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     //// icon for HISTORY_MUSEUM=====================================
     let historyMuseumIcon = L.icon({
       iconUrl: 'img/historyMuseum.png',
-      iconSize: [50, 50],
+      iconSize: [35, 35],
     });
     //// icon for HISTORY_MUSEUM=====================================
     //---------------------------------------------------------------------//
@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     //// icon for SCIENCE_MUSEUM=====================================
     let scienceMuseumIcon = L.icon({
       iconUrl: 'img/scienceMuseum.png',
-      iconSize: [50, 50],
+      iconSize: [35, 35],
     });
     //// icon for SCIENCE_MUSEUM=====================================
     //---------------------------------------------------------------------//
@@ -80,7 +80,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         }
 
 
-        let searchResults = await search(latLng, searchTerms, 5000, valueBtn);
+        let searchResults = await search(latLng, searchTerms, 10000, valueBtn);
         let searchResultElement = document.querySelector("#results");
         searchResultElement.innerHTML = "";
 

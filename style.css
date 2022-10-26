@@ -2,27 +2,41 @@
   height: 100vh;
 }
 
-#map-container {
+.containe-fluid {
   position: relative;
 }
 
-#search-container {
+/* .container {
+  background-color: yellow;
   position: absolute;
   top: 2%;
-  left: 200px;
   z-index: 30000;
-  background-color: #212121;
+  width: 200px;
+  height: 200px;
+  left: 100px;
+} */
 
+
+#containersearch
+{
+  background-color: #212121;
+  position: absolute;
+  top: 2%;
+  z-index: 30000;
+  width: 200px;
+  height: 200px;
+  left: 100px;
   /* background-image:linear-gradient(  #250707, #270b0b, rgb(102, 69, 69)); */
 
   /* the height container, depending on its content, can be more than 25px. 
     But when it has no content, it has to be 25px */
+    
   min-height: 25px;
-  width: 500px;
-  padding-top: 15px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  display: none;
+  width: 300px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  /* display: none; */
   border-radius: 18px 18px 18px 18px;
   color: yellow;
   opacity: 96%;
@@ -49,12 +63,12 @@
   width: 300px;
   height: 300px;
   background-color: #212121;
-  border-color:#212121 ;
+  border-color: #212121;
   color: #fab700;
 }
-.popup img
-{
-  height:100px;
+
+.popup img {
+  height: 100px;
 }
 
 @media (min-width: 767px) {
@@ -78,17 +92,17 @@
 } */
 
 
-.btn
-{
+.btn {
   background-color: #fab700;
   color: white;
   padding: 10px;
   padding-right: 8px;
 }
 
-input[type="text"], textarea {
+input[type="text"],
+textarea {
 
-  background-color : #212121; 
+  background-color: #212121;
   border: 6px white;
 
 }
@@ -99,27 +113,32 @@ input {
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: groove;
-  background-color: #eee;
+  border-color: #fab700;
+  /* background-color: ; */
+  height: 40px;
 }
 
 .no-outline:focus {
   outline: none;
 }
 
-input::placeholder
-{
-  color:yellow;
+input::placeholder {
+  color: yellow;
   opacity: 50%;
 }
 
-input, select, textarea{
+input,
+select,
+textarea {
   color: yellow;
 }
 
-textarea:focus, input:focus {
+textarea:focus,
+input:focus {
   color: yellow;
 }
 
-.leaflet-popup-content-wrapper, .leaflet-popup.tip {
+.leaflet-popup-content-wrapper,
+.leaflet-popup.tip {
   background-color: #212121;
 }
