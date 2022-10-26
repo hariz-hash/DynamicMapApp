@@ -57,18 +57,15 @@ window.addEventListener("DOMContentLoaded", async function () {
     //     }
     //   });
 
-      //   document.querySelector("#btnToggleSearch")
-      // .addEventListener("click", function () {
-      //   let searchContainerElement =
-      //     document.querySelector("#search-container");
-      //   let currentDisplay = searchContainerElement.style.display;
-      //   if (!currentDisplay || currentDisplay == "none") {
-      //     // if it is not visible
-      //     searchContainerElement.style.display = "block";
-      //   } else {
-      //     searchContainerElement.style.display = "none";
-      //   }
-      // });
+    document.querySelector("#RadioBtnShow").addEventListener("click", function () {
+      let radioButtonElement = document.querySelector(".p-2");
+      if (radioButtonElement.style.display == "none") {
+        // if it is not visible
+        radioButtonElement.style.display = "block";
+      } else {
+        radioButtonElement.style.display = "none";
+      }
+    });
 
 
     document
@@ -111,22 +108,22 @@ window.addEventListener("DOMContentLoaded", async function () {
           marker.bindPopup(function () {
             let el = document.createElement("div");
             // add the 'popup' class to the <div>
-            
+
             // see style.css for its definition
             el.classList.add("popup");
             el.classList.add('img')
-            
+
             el.innerHTML = `
             <div class="card-body">
               <h5 class="card-title">${r.name}</h5>
 
                 
               `;
-              async function getPicture() {
-                let photos = await getPhoto(r.fsq_id);
-                let firstPhoto = photos[0];
-                let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
-                el.innerHTML += `<img  src="${url}"/>
+            async function getPicture() {
+              let photos = await getPhoto(r.fsq_id);
+              let firstPhoto = photos[0];
+              let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
+              el.innerHTML += `<img  src="${url}"/>
 
               </div>`;
             }
