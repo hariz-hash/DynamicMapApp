@@ -104,3 +104,11 @@ input::placeholder
   color:yellow;
   opacity: 50%;
 }
+
+input, select, textarea{
+  color: black;
+}
+
+textarea:focus, input:focus {
+  color: yellow;
+}

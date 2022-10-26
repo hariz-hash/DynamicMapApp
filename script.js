@@ -8,6 +8,32 @@ window.addEventListener("DOMContentLoaded", async function () {
     let searchResultLayer = L.layerGroup();
     searchResultLayer.addTo(map);
 
+    // icon for ART_MUSEUM=====================================
+    let artMuseumIcon = L.icon({
+      iconUrl: 'img/art.png',
+      iconSize: [38, 95],
+    });
+    //// icon for ART_MUSEUM=====================================
+    //---------------------------------------------------------------------//
+  
+    //// icon for HISTORY_MUSEUM=====================================
+    let historyMuseumIcon = L.icon({
+      iconUrl: 'img/history.png',
+      iconSize: [38, 95],
+    });
+    //// icon for HISTORY_MUSEUM=====================================
+    //---------------------------------------------------------------------//
+  
+    //// icon for SCIENCE_MUSEUM=====================================
+    let scienceMuseumIcon = L.icon({
+      iconUrl: 'img/SCIENC.png',
+      iconSize: [38, 95],
+    });
+    //// icon for SCIENCE_MUSEUM=====================================
+    //---------------------------------------------------------------------//
+//12=========================================================================================
+
+
     document
       .querySelector("#btnToggleSearch")
       .addEventListener("click", function () {
@@ -42,10 +68,10 @@ window.addEventListener("DOMContentLoaded", async function () {
             valueBtn = rb.value;
           }
         }
-        let searchResults = await search(latLng, searchTerms, 5000,valueBtn);
+        let searchResults = await search(latLng, searchTerms, 5000, valueBtn);
         let radioButtonMuseum = await search(latLng);
         let searchResultElement = document.querySelector("#results");
-        searchResultElement.innerHTML="";
+        searchResultElement.innerHTML = "";
 
         for (let r of searchResults.results) {
           console.log(r);
