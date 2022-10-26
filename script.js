@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", async function () {
   function init() {
     let map = initMap();
 
+
     // add a layer to store the search results
     let searchResultLayer = L.layerGroup();
     searchResultLayer.addTo(map);
@@ -32,6 +33,15 @@ window.addEventListener("DOMContentLoaded", async function () {
     //// icon for SCIENCE_MUSEUM=====================================
     //---------------------------------------------------------------------//
     //12=========================================================================================
+    function displayIcon(icons) {
+      const display = {
+        "10028": artMuseumIcon,
+        "10030": historyMuseumIcon,
+        "10031": scienceMuseumIcon
+      }
+      return display[icons];
+    }
+
 
     document
       .querySelector("#btnToggleSearch")
@@ -65,11 +75,11 @@ window.addEventListener("DOMContentLoaded", async function () {
         for (let rb of museum) {
           if (rb.checked) {
             valueBtn = rb.value;
-       
+
           }
         }
 
-        
+
         let searchResults = await search(latLng, searchTerms, 5000, valueBtn);
         let searchResultElement = document.querySelector("#results");
         searchResultElement.innerHTML = "";
@@ -77,12 +87,12 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         for (let r of searchResults.results) {
           console.log(r);
-         
+
           // Display the marker
           let lat = r.geocodes.main.latitude;
           let lng = r.geocodes.main.longitude;
 
-          let marker = L.marker([lat, lng]).addTo(searchResultLayer);
+          let marker = L.marker([lat, lng], { icon: displayIcon(valueBtn) }).addTo(searchResultLayer);
           // marker.bindPopup(`<h1>${r.name}</h1>`)
 
           marker.bindPopup(function () {
