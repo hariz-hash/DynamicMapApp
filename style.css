@@ -9,7 +9,7 @@
 #search-container {
   position: absolute;
   top: 2%;
-  left: 55px;
+  left: 200px;
   z-index: 30000;
   background-color: #212121;
 
@@ -48,6 +48,13 @@
   overflow: scroll;
   width: 300px;
   height: 300px;
+  background-color: #212121;
+  border-color:#212121 ;
+  color: #fab700;
+}
+.popup img
+{
+  height:100px;
 }
 
 @media (min-width: 767px) {
@@ -111,4 +118,8 @@ input, select, textarea{
 
 textarea:focus, input:focus {
   color: yellow;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup.tip {
+  background-color: #212121;
 }

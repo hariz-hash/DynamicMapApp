@@ -98,14 +98,24 @@ window.addEventListener("DOMContentLoaded", async function () {
           marker.bindPopup(function () {
             let el = document.createElement("div");
             // add the 'popup' class to the <div>
+            
             // see style.css for its definition
             el.classList.add("popup");
-            el.innerHTML = `<h1>${r.name}</h1>`;
-            async function getPicture() {
-              let photos = await getPhoto(r.fsq_id);
-              let firstPhoto = photos[0];
-              let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
-              el.innerHTML += `<img src="${url}"/>`;
+            el.classList.add('img')
+            
+            el.innerHTML = `
+            <div class="card-body">
+              <h5 class="card-title">${r.name}</h5>
+
+                
+              `;
+              async function getPicture() {
+                let photos = await getPhoto(r.fsq_id);
+                let firstPhoto = photos[0];
+                let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
+                el.innerHTML += `<img  src="${url}"/>
+
+              </div>`;
             }
 
             getPicture();
