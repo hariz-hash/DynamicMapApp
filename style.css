@@ -106,7 +106,7 @@ input::placeholder
 }
 
 input, select, textarea{
-  color: black;
+  color: yellow;
 }
 
 textarea:focus, input:focus {

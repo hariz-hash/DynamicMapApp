@@ -33,7 +33,6 @@ window.addEventListener("DOMContentLoaded", async function () {
     //---------------------------------------------------------------------//
 //12=========================================================================================
 
-
     document
       .querySelector("#btnToggleSearch")
       .addEventListener("click", function () {
@@ -68,11 +67,13 @@ window.addEventListener("DOMContentLoaded", async function () {
             valueBtn = rb.value;
           }
         }
+
         let searchResults = await search(latLng, searchTerms, 5000, valueBtn);
         let radioButtonMuseum = await search(latLng);
         let searchResultElement = document.querySelector("#results");
         searchResultElement.innerHTML = "";
 
+        
         for (let r of searchResults.results) {
           console.log(r);
           // Display the marker
@@ -103,6 +104,8 @@ window.addEventListener("DOMContentLoaded", async function () {
           resultElement.innerText = r.name;
           resultElement.classList.add("search-result");
 
+
+
           // the second parameter is an anonymous function
           // inside its scope, we refer to `r` which is not is own local variable
           // and it is not a global variable (i.e it's the local variable of another scope)
@@ -119,6 +122,7 @@ window.addEventListener("DOMContentLoaded", async function () {
           searchResultElement.appendChild(resultElement);
         }
       });
+
 
     // SEARCHVENUE
   }
