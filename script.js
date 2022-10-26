@@ -43,19 +43,32 @@ window.addEventListener("DOMContentLoaded", async function () {
     }
 
 
-    document
-      .querySelector("#btnToggleSearch")
-      .addEventListener("click", function () {
-        let searchContainerElement =
-          document.querySelector("#search-container");
-        let currentDisplay = searchContainerElement.style.display;
-        if (!currentDisplay || currentDisplay == "none") {
-          // if it is not visible
-          searchContainerElement.style.display = "block";
-        } else {
-          searchContainerElement.style.display = "none";
-        }
-      });
+    // document
+    //   .querySelector("#btnToggleSearch")
+    //   .addEventListener("click", function () {
+    //     let searchContainerElement =
+    //       document.querySelector("#search-container");
+    //     let currentDisplay = searchContainerElement.style.display;
+    //     if (!currentDisplay || currentDisplay == "none") {
+    //       // if it is not visible
+    //       searchContainerElement.style.display = "block";
+    //     } else {
+    //       searchContainerElement.style.display = "none";
+    //     }
+    //   });
+
+      //   document.querySelector("#btnToggleSearch")
+      // .addEventListener("click", function () {
+      //   let searchContainerElement =
+      //     document.querySelector("#search-container");
+      //   let currentDisplay = searchContainerElement.style.display;
+      //   if (!currentDisplay || currentDisplay == "none") {
+      //     // if it is not visible
+      //     searchContainerElement.style.display = "block";
+      //   } else {
+      //     searchContainerElement.style.display = "none";
+      //   }
+      // });
 
 
     document
