@@ -167,17 +167,25 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 function initMap() {
   // create a map object
-  let map = L.map("map");
+  let map = L.map('map', {
+    maxZoom: 20,
+    minZoom: 6,
+    zoomControl: false
+});
+L.control.zoom({
+  position: 'topright'
+}).addTo(map);
   // set the center point and the zoom
   map.setView([1.29, 103.85], 13);
 
+  
   // need set up the tile layer
   L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
     {
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
+      // maxZoom: 18,
       id: "mapbox/streets-v11",
       tileSize: 512,
       zoomOffset: -1,
