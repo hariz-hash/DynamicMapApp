@@ -9,11 +9,13 @@
 #containersearch {
   background-color: #212121;
   position: absolute;
-  top: 2%;
+  /* top: 2%; */
   z-index: 30000;
   width: 300px;
+  margin-top: 20px;
+  margin-left: 20px;
   /* height: 200px; */
-  left: 50px;
+  /* left: 50px; */
 
   /* the height container, depending on its content, can be more than 25px. 
     But when it has no content, it has to be 25px */
