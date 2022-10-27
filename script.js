@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         // remove all the existing markers first before adding the new ones
         searchResultLayer.clearLayers();
 
-        let searchTerms = document.querySelector("#searchTerm").value;
+        let searchTerms = (document.querySelector("#searchTerm").value).trim();
         let boundaries = map.getBounds();
         let center = boundaries.getCenter(); // in lat lng
         let latLng = center.lat + "," + center.lng;
@@ -89,8 +89,8 @@ window.addEventListener("DOMContentLoaded", async function () {
           }
         }
 
-
-        let searchResults = await search(latLng, searchTerms, 10000, valueBtn);
+        console.log(`asd${searchTerms}asd`);
+        let searchResults = await search(latLng, searchTerms, valueBtn);
         let searchResultElement = document.querySelector("#results");
         searchResultElement.innerHTML = "";
 
