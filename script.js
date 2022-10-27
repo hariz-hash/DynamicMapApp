@@ -57,15 +57,15 @@ window.addEventListener("DOMContentLoaded", async function () {
     //     }
     //   });
 
-    document.querySelector("#RadioBtnShow").addEventListener("click", function () {
-      let radioButtonElement = document.querySelector(".p-2");
-      if (radioButtonElement.style.display == "none") {
-        // if it is not visible
-        radioButtonElement.style.display = "block";
-      } else {
-        radioButtonElement.style.display = "none";
-      }
-    });
+    // document.querySelector("#RadioBtnShow").addEventListener("click", function () {
+    //   let radioButtonElement = document.querySelector(".p-2");
+    //   if (radioButtonElement.style.display == "none") {
+    //     // if it is not visible
+    //     radioButtonElement.style.display = "block";
+    //   } else {
+    //     radioButtonElement.style.display = "none";
+    //   }
+    // });
 
 
     document
