@@ -116,19 +116,19 @@ input {
 }
 
 input::placeholder {
-  color: yellow;
+  color: #fab700;
   opacity: 50%;
 }
 
 input,
 select,
 textarea {
-  color: yellow;
+  color: #fab700;
 }
 
 textarea:focus,
 input:focus {
-  color: yellow;
+  color: #fab700;
 }
 
 .leaflet-popup-content-wrapper,
@@ -137,12 +137,49 @@ input:focus {
 }
 
 
-.searchbox
+/* .searchbox
 {
   padding-top:10px;
-}
-
+  padding-bottom:30px;
+} */
+/*
 .d-flex
 {
-    /* padding: 5px */
+    
+}
+*/
+
+
+.my-tab .tab-pane{border:solid 1px blue;}
+
+
+
+#nav-home-tab:focus 
+{
+  background-color: #fab700;
+  color:white;
+  border-color: #fab700;
+}
+
+
+#nav-profile-tab:focus
+{
+  background-color: #fab700;
+  color:white;
+  border-color: #fab700;
+}
+
+#nav-home-tab .nav-item .nav-link.active {
+  color: #0080FF;
+}
+
+
+
+.nav-tabs .nav-link
+{
+  color: white;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  background-color: pink;
 }
