@@ -42,3 +42,32 @@ async function getPlaceDetails(fsq_id) {
   });
   return response.data;
 }
+
+const API_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?";
+const API_WEATHER_KEY = "a7d4412c5faff421f4d323e4648b95a0";
+
+// async functionWeather(ll,)
+// {
+//   let response = await axios.get(API_BASE_URL + `${fsq_id}/photos`, {
+//     headers: headers,
+//   });
+//   return response.data;
+// }
+let unit = "metric";
+let urlTest2 = `${API_WEATHER_URL}lat=1.294126&lon=103.849517&appid=${API_WEATHER_KEY}&units=${unit}`;
+
+// async function getWeather(lat, lng) {
+//   console.log(lat + " " + lng);
+//   let unit = "metric";
+//
+//   let response = await axios.get(url);
+//   console.log(response.data);
+//   return response.data; // return the search results from the function
+// }
+
+async function sendGetRequest(lat, lng) {
+  let url = `${API_WEATHER_URL} lat=${lat}&lon=${lng}&appid=${API_WEATHER_KEY}&units=${unit}`;
+
+  const resp = await axios.get(urlTest2);
+  console.log(resp.data);
+}

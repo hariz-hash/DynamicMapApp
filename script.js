@@ -124,7 +124,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             //   <h5 class="card-title">${r.website}</h5>
 
             //   `;
-
+            // console.log(data + "tftftfu");
             async function getPicture() {
               let photos = await getPhoto(r.fsq_id);
               let firstPhoto = photos[0];
@@ -153,6 +153,10 @@ window.addEventListener("DOMContentLoaded", async function () {
             }
 
             getPicture();
+
+            let resultt = sendGetRequest(lat, lng);
+            console.log(resultt);
+
             return el;
           });
 
