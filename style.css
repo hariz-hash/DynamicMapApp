@@ -20,18 +20,17 @@
   /* the height container, depending on its content, can be more than 25px. 
     But when it has no content, it has to be 25px */
   /* min-height: 100px; */
-  overflow: hidden;
+  /* overflow: hidden; */
   min-height: 25px;
-  padding-left:10px;
-  padding-right:10px;
+  /* height: 200px; */
+  padding-left: 10px;
+  padding-right: 10px;
 
   /* display: none; */
   border-radius: 18px 18px 18px 18px;
   color: yellow;
   opacity: 96%;
 }
-
-
 
 #results {
   max-height: 130px;
@@ -63,7 +62,6 @@
 }
 
 @media (min-width: 767px) {
-
   /* because the div is a block-level element, so we use display: block */
   #search-container {
     display: block;
@@ -75,13 +73,11 @@
   }
 }
 
-
 /* input[type="button"] {
   background: rgba(0, 0, 0, 0);
   border: none;
   outline: none;
 } */
-
 
 .btn {
   background-color: #fab700;
@@ -94,12 +90,9 @@
 
 input[type="text"],
 textarea {
-
   background-color: #212121;
   border: 6px white;
-
 }
-
 
 input {
   border-top-style: hidden;
@@ -138,7 +131,6 @@ input:focus {
   background-color: #212121;
 }
 
-
 /* .searchbox
 {
   padding-top:10px;
@@ -151,34 +143,27 @@ input:focus {
 }
 */
 
+.my-tab .tab-pane {
+  border: solid 1px blue;
+}
 
-.my-tab .tab-pane{border:solid 1px blue;}
-
-
-
-#nav-home-tab:focus 
-{
+#nav-home-tab:focus {
   background-color: #fab700;
-  color:white;
+  color: white;
   border-color: #fab700;
 }
 
-
-#nav-profile-tab:focus
-{
+#nav-profile-tab:focus {
   background-color: #fab700;
-  color:white;
+  color: white;
   border-color: #fab700;
 }
 
 #nav-home-tab .nav-item .nav-link.active {
-  color: #0080FF;
+  color: #0080ff;
 }
 
-
-
-.nav-tabs .nav-link
-{
+.nav-tabs .nav-link {
   color: white;
 }
 
