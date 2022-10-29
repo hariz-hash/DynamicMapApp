@@ -19,7 +19,7 @@ async function search(ll, search, category) {
     params: {
       ll: ll,
       query: search,
-      radius: 1000,
+      radius: 15000,
       categories: category, // ok for category to be empty string
       limit: 50,
       v: "20210903", // (Unique FourSquare) YYMMDD format (its for version control). I want to use your version of API dated before this date
@@ -30,6 +30,13 @@ async function search(ll, search, category) {
 }
 
 async function getPhoto(fsq_id) {
+  let response = await axios.get(API_BASE_URL + `${fsq_id}/photos`, {
+    headers: headers,
+  });
+  return response.data;
+}
+
+async function getPlaceDetails(fsq_id) {
   let response = await axios.get(API_BASE_URL + `${fsq_id}/photos`, {
     headers: headers,
   });

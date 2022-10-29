@@ -65,7 +65,6 @@ window.addEventListener("DOMContentLoaded", async function () {
     //   }
     // });
 
-   
     document
       .querySelector("#btnSearch")
       .addEventListener("click", async function () {
@@ -76,13 +75,13 @@ window.addEventListener("DOMContentLoaded", async function () {
         let boundaries = map.getBounds();
         let center = boundaries.getCenter(); // in lat lng
         let latLng = center.lat + "," + center.lng;
-        let dropdownValue="";
+        let dropdownValue = "";
         dropdownValue = document.getElementById("select1").value;
         // document.getElementById("select1").addEventListener("change", function () {
         //     dropdownValue = this.value
         // });
 
-        console.log(dropdownValue);
+        // console.log(dropdownValue);
 
         // SEARCH MUSEUM only
         // let museum = document.querySelectorAll(".museum");
@@ -99,7 +98,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         searchResultElement.innerHTML = "";
 
         for (let r of searchResults.results) {
-          console.log(r);
+          console.log(searchResults.results);
 
           // Display the marker
           let lat = r.geocodes.main.latitude;
@@ -117,20 +116,40 @@ window.addEventListener("DOMContentLoaded", async function () {
             // see style.css for its definition
             el.classList.add("popup");
             el.classList.add("img");
+            el.classList.add("card");
+            // el.innerHTML = `
+            // <div class="card-body">
+            //   <h5 class="card-title">${r.name}</h5>
+            //   <h5 class="card-title">${r.location.formatted_address}</h5>
+            //   <h5 class="card-title">${r.website}</h5>
 
-            el.innerHTML = `
-            <div class="card-body">
-              <h5 class="card-title">${r.name}</h5>
+            //   `;
 
-                
-              `;
             async function getPicture() {
               let photos = await getPhoto(r.fsq_id);
               let firstPhoto = photos[0];
+              // console.log(firstPhoto);
+              if (firstPhoto == undefined) {
+                el.innerHTML += " Sorry no photo";
+              }
               let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
-              el.innerHTML += `<img  src="${url}"/>
-
-              </div>`;
+              // if(url == "")
+              // {
+              //   el.innerHTML += "No image found";
+              // }
+              // if (r.location.formatted_address == undefined) {
+              //   el.innerHTML += "Addess not updated";
+              // }
+              el.innerHTML += `
+              <div class="card "  >
+                <img src="${url}" class="card-img-top" alt="...">
+                  <div class="card-body m-0 p-0">
+                    <h6 class="card-title">${r.name}</h6>
+                    <p class="card-text">${r.location.address}</p>
+                    <a href="#" class="btn btn-primary p-1">Go somewhere</a>
+                  </div>
+              </div>
+              `;
             }
 
             getPicture();
@@ -158,6 +177,12 @@ window.addEventListener("DOMContentLoaded", async function () {
           searchResultElement.appendChild(resultElement);
         }
       });
+    let collapseElementList = [].slice.call(
+      document.querySelectorAll(".collapse")
+    );
+    let collapseList = collapseElementList.map(function (collapseEl) {
+      return new bootstrap.Collapse(collapseEl);
+    });
 
     // SEARCHVENUE
   }

@@ -34,24 +34,28 @@
 
 #results {
   max-height: 130px;
+  max-width: 280px;
   overflow-y: scroll;
+  background-color: #121212;
+  border-radius: 15px;
 }
 
 .search-result {
   margin: 5px;
 }
 
-#btnToggleSearch {
+/* #btnToggleSearch {
   position: absolute;
   left: 50px;
   top: 10px;
   z-index: 300000;
-}
+} */
 
 .popup {
-  overflow: scroll;
-  width: 300px;
-  height: 300px;
+  /* overflow: scroll; */
+  width: 200px;
+  height: auto;
+  padding: 0px;
   background-color: #212121;
   border-color: #212121;
   color: #fab700;
@@ -169,4 +173,9 @@ input:focus {
 
 .nav-tabs .nav-item .nav-link.active {
   background-color: pink;
+}
+
+.card {
+  background-color: #212121;
+  border: 0px;
 }
