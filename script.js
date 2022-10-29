@@ -4,14 +4,13 @@ window.addEventListener("DOMContentLoaded", async function () {
   function init() {
     let map = initMap();
 
-
     // add a layer to store the search results
     let searchResultLayer = L.layerGroup();
     searchResultLayer.addTo(map);
 
     // icon for ART_MUSEUM=====================================
     let artMuseumIcon = L.icon({
-      iconUrl: 'img/ArtMuseum.png',
+      iconUrl: "img/ArtMuseum.png",
       iconSize: [35, 35],
     });
     //// icon for ART_MUSEUM=====================================
@@ -19,7 +18,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     //// icon for HISTORY_MUSEUM=====================================
     let historyMuseumIcon = L.icon({
-      iconUrl: 'img/historyMuseum.png',
+      iconUrl: "img/historyMuseum.png",
       iconSize: [35, 35],
     });
     //// icon for HISTORY_MUSEUM=====================================
@@ -27,7 +26,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     //// icon for SCIENCE_MUSEUM=====================================
     let scienceMuseumIcon = L.icon({
-      iconUrl: 'img/scienceMuseum.png',
+      iconUrl: "img/scienceMuseum.png",
       iconSize: [35, 35],
     });
     //// icon for SCIENCE_MUSEUM=====================================
@@ -35,13 +34,12 @@ window.addEventListener("DOMContentLoaded", async function () {
     //12=========================================================================================
     function displayIcon(icons) {
       const display = {
-        "10028": artMuseumIcon,
-        "10030": historyMuseumIcon,
-        "10031": scienceMuseumIcon
-      }
+        10028: artMuseumIcon,
+        10030: historyMuseumIcon,
+        10031: scienceMuseumIcon,
+      };
       return display[icons];
     }
-
 
     // document
     //   .querySelector("#btnToggleSearch")
@@ -67,33 +65,38 @@ window.addEventListener("DOMContentLoaded", async function () {
     //   }
     // });
 
-
+   
     document
       .querySelector("#btnSearch")
       .addEventListener("click", async function () {
         // remove all the existing markers first before adding the new ones
         searchResultLayer.clearLayers();
 
-        let searchTerms = (document.querySelector("#searchTerm").value).trim();
+        let searchTerms = document.querySelector("#searchTerm").value.trim();
         let boundaries = map.getBounds();
         let center = boundaries.getCenter(); // in lat lng
         let latLng = center.lat + "," + center.lng;
+        let dropdownValue="";
+        dropdownValue = document.getElementById("select1").value;
+        // document.getElementById("select1").addEventListener("change", function () {
+        //     dropdownValue = this.value
+        // });
+
+        console.log(dropdownValue);
 
         // SEARCH MUSEUM only
-        let museum = document.querySelectorAll(".museum");
-        let valueBtn = "";
-        for (let rb of museum) {
-          if (rb.checked) {
-            valueBtn = rb.value;
+        // let museum = document.querySelectorAll(".museum");
+        // let valueBtn = "";
+        // for (let rb of museum) {
+        //   if (rb.checked) {
+        //     valueBtn = rb.value;
+        //   }
+        // }
 
-          }
-        }
-
-        console.log(`asd${searchTerms}asd`);
-        let searchResults = await search(latLng, searchTerms, valueBtn);
+        // console.log(`asd${searchTerms}asd`);
+        let searchResults = await search(latLng, searchTerms, dropdownValue);
         let searchResultElement = document.querySelector("#results");
         searchResultElement.innerHTML = "";
-
 
         for (let r of searchResults.results) {
           console.log(r);
@@ -102,7 +105,9 @@ window.addEventListener("DOMContentLoaded", async function () {
           let lat = r.geocodes.main.latitude;
           let lng = r.geocodes.main.longitude;
 
-          let marker = L.marker([lat, lng], { icon: displayIcon(valueBtn) }).addTo(searchResultLayer);
+          let marker = L.marker([lat, lng], {
+            icon: displayIcon(dropdownValue),
+          }).addTo(searchResultLayer);
           // marker.bindPopup(`<h1>${r.name}</h1>`)
 
           marker.bindPopup(function () {
@@ -111,7 +116,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
             // see style.css for its definition
             el.classList.add("popup");
-            el.classList.add('img')
+            el.classList.add("img");
 
             el.innerHTML = `
             <div class="card-body">
@@ -137,8 +142,6 @@ window.addEventListener("DOMContentLoaded", async function () {
           resultElement.innerText = r.name;
           resultElement.classList.add("search-result");
 
-
-
           // the second parameter is an anonymous function
           // inside its scope, we refer to `r` which is not is own local variable
           // and it is not a global variable (i.e it's the local variable of another scope)
@@ -154,10 +157,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
           searchResultElement.appendChild(resultElement);
         }
-
-
       });
-
 
     // SEARCHVENUE
   }
@@ -167,18 +167,19 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 function initMap() {
   // create a map object
-  let map = L.map('map', {
+  let map = L.map("map", {
     maxZoom: 20,
     minZoom: 6,
-    zoomControl: false
-});
-L.control.zoom({
-  position: 'topright'
-}).addTo(map);
+    zoomControl: false,
+  });
+  L.control
+    .zoom({
+      position: "topright",
+    })
+    .addTo(map);
   // set the center point and the zoom
   map.setView([1.29, 103.85], 13);
 
-  
   // need set up the tile layer
   L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
