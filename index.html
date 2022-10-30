@@ -22,35 +22,60 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="style.css" />
+    
+
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  
 
-  <div class="containe-fluid">
-    <!-- <button id="btnToggleSearch">Toggle Search</button> -->
-    <div class="container m-2 p-2" id="containersearch" >
-      <div class="my-1">
-        <input type="text" class="no-outline" id="searchTerm" placeholder="Search.." />
-        <button id="btnSearch" class="btn">Search</button>
-      </div>
-      <select id="select1" class="my-2" style="width: 280px ;"> 
-        <option name="museum" value="10028">Art Museum</option> 
-        <option name="museum" value="10030">History museum</option> 
-        <option name="museum" value="10031">Science Museum</option> 
-      </select> 
+        <!-- <button id="btnToggleSearch">Toggle Search</button> -->
+        <div class="container m-2 p-2 position-absolute bottom-0 start-0" id="containersearch" >
 
-      <div id="results" class="collapse"></div>
-      </li>
 
-    </div>
-    <div id="map"></div>
-    <!-- <div id="search-container" class="container">
 
-      
+          <!--============================-->
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Search</a>
+              <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Weather</a>
+              <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Others</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <div class="my-1">
+                <input type="text" class="no-outline" id="searchTerm" placeholder="Search.." />
+                <button id="btnSearch" class="btn">Search</button>
+              </div>
+              <select id="select1" class="my-2" style="width: 280px ;"> 
+                <option name="museum" value="10028">Art Museum</option> 
+                <option name="museum" value="10030">History museum</option> 
+                <option name="museum" value="10031">Science Museum</option> 
+              </select> 
+              
+          <div id="results" class="collapse"></div>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <p>clicked profile</p>
+              <p>clicked profile</p>
+              <p>clicked profile</p>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+              <p>clicked contact</p>
+              <p>clicked contact</p>
+              <p>clicked contact</p>
+            </div>
+          </div>
 
-    </div> -->
-  </div>
+
+
+          </li>
+
+        </div>
+        <div id="map"></div>
+
 
   <!-- axios-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js"

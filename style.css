@@ -2,9 +2,9 @@
   height: 100vh;
 }
 
-.containe-fluid {
+/* .containe-fluid {
   position: relative;
-}
+} */
 
 #containersearch {
   background-color: #212121;
@@ -21,7 +21,7 @@
     But when it has no content, it has to be 25px */
   /* min-height: 100px; */
   /* overflow: hidden; */
-  min-height: auto;
+  min-height: 300px;
   /* height: 200px; */
   /* padding-left: 10px;
   padding-right: 10px; */
@@ -178,4 +178,9 @@ input:focus {
 .card {
   background-color: #212121;
   border: 0px;
+}
+
+.search {
+  position: absolute;
+  z-index: 30000;
 }
