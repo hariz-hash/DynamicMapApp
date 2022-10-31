@@ -1,6 +1,17 @@
 // Use DOMContentLoaded as our main entry point
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+}
 window.addEventListener("DOMContentLoaded", async function () {
   // this function is to setup the application
+
   function init() {
     let map = initMap();
 
@@ -203,7 +214,7 @@ function initMap() {
   });
   L.control
     .zoom({
-      position: "topright",
+      position: "bottomleft",
     })
     .addTo(map);
   // set the center point and the zoom
