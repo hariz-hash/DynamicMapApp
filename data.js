@@ -45,14 +45,15 @@ async function getPlaceDetails(fsq_id) {
   return response.data;
 }
 
-const API_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?";
-const API_WEATHER_KEY = "a7d4412c5faff421f4d323e4648b95a0";
-const unit = "metric";
-async function sendGetRequest() {
-  let url = `${API_WEATHER_URL}lat=1.3521&lon=103.8198&appid=${API_WEATHER_KEY}&units=${unit}`;
+// async function sendGetRequest() {
+//   const API_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?";
+//   const API_WEATHER_KEY = "a7d4412c5faff421f4d323e4648b95a0";
+//   const unit = "metric";
 
-  const resp = await axios.get(url);
-  console.log(resp.data.main.temp);
-}
+//   let url = `${API_WEATHER_URL}lat=1.3521&lon=103.8198&appid=${API_WEATHER_KEY}&units=${unit}`;
 
-sendGetRequest();
+//   const resp = await axios.get(url);
+//   console.log(resp.data.main.temp);
+// }
+
+// sendGetRequest();

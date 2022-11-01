@@ -1,14 +1,5 @@
 // Use DOMContentLoaded as our main entry point
 
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
-}
 window.addEventListener("DOMContentLoaded", async function () {
   // this function is to setup the application
 
@@ -75,6 +66,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     //     radioButtonElement.style.display = "none";
     //   }
     // });
+    // let currentWeather = sendGetRequest("1.3521","103.8198");
 
     document
       .querySelector("#btnSearch")
@@ -120,6 +112,14 @@ window.addEventListener("DOMContentLoaded", async function () {
           }).addTo(searchResultLayer);
           // marker.bindPopup(`<h1>${r.name}</h1>`)
 
+          let hideResult = document.querySelector("#results");
+
+          hideResult.addEventListener("click", function () {
+            let hidden = (hideResult.style.display = "none");
+
+            //results
+          });
+
           marker.bindPopup(function () {
             let el = document.createElement("div");
             // add the 'popup' class to the <div>
@@ -128,6 +128,20 @@ window.addEventListener("DOMContentLoaded", async function () {
             el.classList.add("popup");
             el.classList.add("img");
             el.classList.add("card");
+
+            // document
+            //   .querySelector("#btnToggleSearch")
+            //   .addEventListener("click", function () {
+            //     let searchContainerElement =
+            //       document.querySelector("#search-container");
+            //     let currentDisplay = searchContainerElement.style.display;
+            //     if (!currentDisplay || currentDisplay == "none") {
+            //       // if it is not visible
+            //       searchContainerElement.style.display = "block";
+            //     } else {
+            //       searchContainerElement.style.display = "none";
+            //     }
+            //   });
             // el.innerHTML = `
             // <div class="card-body">
             //   <h5 class="card-title">${r.name}</h5>
@@ -165,8 +179,8 @@ window.addEventListener("DOMContentLoaded", async function () {
 
             getPicture();
 
-            let resultt = sendGetRequest(lat, lng);
-            console.log(resultt);
+            // let resultt = sendGetRequest(lat, lng);
+            // console.log(resultt);
 
             return el;
           });
@@ -199,7 +213,23 @@ window.addEventListener("DOMContentLoaded", async function () {
       return new bootstrap.Collapse(collapseEl);
     });
 
-    // SEARCHVENUE
+    // WEATHER ============================================================================================
+
+    async function sendGetRequest() {
+      const API_WEATHER_URL =
+        "https://api.openweathermap.org/data/2.5/weather?";
+      const API_WEATHER_KEY = "a7d4412c5faff421f4d323e4648b95a0";
+      const unit = "metric";
+
+      let url = `${API_WEATHER_URL}lat=1.3521&lon=103.8198&appid=${API_WEATHER_KEY}&units=${unit}`;
+
+      const resp = await axios.get(url);
+      console.log(resp.data);
+    }
+
+    sendGetRequest();
+
+    // WEATHER ============================================================================================
   }
 
   init();

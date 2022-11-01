@@ -7,11 +7,14 @@
 } */
 
 #containersearch {
-  background-color: #212121;
+  /* background-color: #212121; */
   /* position: absolute; */
   /* top: 2%; */
   z-index: 30000;
   width: auto;
+  height: auto;
+  padding: 50px;
+  /* width: 300px; */
   /* margin-top: 20px;
   margin-left: 20px; */
   /* height: 200px; */
@@ -25,11 +28,11 @@
   /* height: 200px; */
   /* padding-left: 10px;
   padding-right: 10px; */
-  height: 80%;
+  /* height: 80%; */
   /* display: none; */
-  border-radius: 0px 0px 50px 50px;
+  border-radius: 0px 0px 30px 30px;
   color: yellow;
-  opacity: 96%;
+  /* opacity: 96%; */
 }
 
 #results {
@@ -183,4 +186,10 @@ input:focus {
 .search {
   position: absolute;
   z-index: 30000;
+}
+
+.weatherbackground {
+  background-color: #212121;
+  color: #fab700;
+  padding: 5px;
 }
