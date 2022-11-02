@@ -216,15 +216,47 @@ window.addEventListener("DOMContentLoaded", async function () {
     // WEATHER ============================================================================================
 
     async function sendGetRequest() {
+      // https://api.openweathermap.org/data/2.5/weather?q=singapore&appid=a7d4412c5faff421f4d323e4648b95a0&units=metric
       const API_WEATHER_URL =
-        "https://api.openweathermap.org/data/2.5/weather?";
+        "https://api.openweathermap.org/data/2.5/weather?q=singapore";
       const API_WEATHER_KEY = "a7d4412c5faff421f4d323e4648b95a0";
       const unit = "metric";
 
-      let url = `${API_WEATHER_URL}lat=1.3521&lon=103.8198&appid=${API_WEATHER_KEY}&units=${unit}`;
+      let url = `${API_WEATHER_URL}&lat=1.3521&lon=103.8198&appid=${API_WEATHER_KEY}&units=${unit}`;
 
       const resp = await axios.get(url);
-      console.log(resp.data);
+
+      const country = resp.data.name;
+      const temp = resp.data.main.temp;
+      const desc = resp.data.weather[0].description;
+
+      const humidity = resp.data.main.humidity;
+      const icon = resp.data.weather[0].icon;
+      console.log(icon);
+
+      document.querySelector(".country").innerText = country;
+      document.querySelector(".temp").innerText = temp;
+      document.querySelector(".description").innerText = desc;
+      document.querySelector(".icon").src =
+        "https://api.openweathermap.org/img/w/" + icon + ".png";
+
+      document.querySelector(".humidity").innerText = humidity;
+
+      // console.log(temp);
+      // console.log(resp.data);
+      // console.log(resp.data.weather[0].description);
+      // console.log(resp.data.weather[0].main);
+      // console.log(resp.data.weather[0].icon);
+
+      // console.log("temp " + );
+      // console.log("temp " + resp.data.main.temp);
+
+      // console.log("temp_min " + resp.data.main.temp_min);
+      // console.log("temp_max " + resp.data.main.temp_max);
+      // console.log("humidity " + resp.data.main.humidity);
+      // console.log("humidity " + resp.data.name);
+
+      // document.querySelector(".displayWeather").innerText ;
     }
 
     sendGetRequest();
