@@ -45,15 +45,19 @@ async function getPlaceDetails(fsq_id) {
   return response.data;
 }
 
-// async function sendGetRequest() {
-//   const API_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?";
-//   const API_WEATHER_KEY = "a7d4412c5faff421f4d323e4648b95a0";
-//   const unit = "metric";
-
-//   let url = `${API_WEATHER_URL}lat=1.3521&lon=103.8198&appid=${API_WEATHER_KEY}&units=${unit}`;
-
-//   const resp = await axios.get(url);
-//   console.log(resp.data.main.temp);
-// }
-
-// sendGetRequest();
+async function displayNearBusStation(ll, category) {
+  let url = API_BASE_URL + "search";
+  let response = await axios.get(url, {
+    headers: headers,
+    params: {
+      ll: ll,
+      query: "mrt",
+      radius: 1000,
+      categories: "19047", // ok for category to be empty string
+      limit: 50,
+      // ne: "1.41,103.93",
+      // sw: "1.30,103.62",
+      v: "20210903", // (Unique FourSquare) YYMMDD format (its for version control). I want to use your version of API dated before this date
+    },
+  });
+}

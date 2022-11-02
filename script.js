@@ -100,11 +100,13 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         // console.log(`asd${searchTerms}asd`);
         let searchResults = await search(latLng, searchTerms, dropdownValue);
+        let displayNearByMrt = await displayNearBusStation(latLng);
+        console.log(displayNearByMrt);
         let searchResultElement = document.querySelector("#results");
         searchResultElement.innerHTML = "";
 
         for (let r of searchResults.results) {
-          console.log(searchResults.results);
+          // console.log(searchResults.results);
 
           // Display the marker
           let lat = r.geocodes.main.latitude;
@@ -291,6 +293,8 @@ function initMap() {
       id: "mapbox/streets-v11",
       tileSize: 512,
       zoomOffset: -1,
+      maxNativeZoom: 18,
+      maxZoom: 100,
       accessToken:
         "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw", //demo access token
     }
