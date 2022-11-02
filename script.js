@@ -10,6 +10,8 @@ window.addEventListener("DOMContentLoaded", async function () {
     let searchResultLayer = L.layerGroup();
     searchResultLayer.addTo(map);
 
+    let markerClusterLayer = L.markerClusterGroup(); // <-- only available because we included the marker cluster JS file
+    markerClusterLayer.addTo(map);
     // icon for ART_MUSEUM=====================================
     let artMuseumIcon = L.icon({
       iconUrl: "img/ArtMuseum.png",
@@ -36,9 +38,10 @@ window.addEventListener("DOMContentLoaded", async function () {
     //12=========================================================================================
     function displayIcon(icons) {
       const display = {
-        10028: artMuseumIcon,
-        10030: historyMuseumIcon,
-        10031: scienceMuseumIcon,
+        10027: artMuseumIcon,
+        10035: scienceMuseumIcon,
+        // 10030: historyMuseumIcon,
+        // 10031: scienceMuseumIcon,
       };
       return display[icons];
     }
@@ -72,7 +75,7 @@ window.addEventListener("DOMContentLoaded", async function () {
       .querySelector("#btnSearch")
       .addEventListener("click", async function () {
         // remove all the existing markers first before adding the new ones
-        searchResultLayer.clearLayers();
+        markerClusterLayer.clearLayers();
 
         let searchTerms = document.querySelector("#searchTerm").value.trim();
         let boundaries = map.getBounds();
@@ -109,7 +112,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
           let marker = L.marker([lat, lng], {
             icon: displayIcon(dropdownValue),
-          }).addTo(searchResultLayer);
+          }).addTo(markerClusterLayer);
           // marker.bindPopup(`<h1>${r.name}</h1>`)
 
           let hideResult = document.querySelector("#results");
