@@ -14,16 +14,16 @@ window.addEventListener("DOMContentLoaded", async function () {
     markerClusterLayer.addTo(map);
     // icon for ART_MUSEUM=====================================
     let artMuseumIcon = L.icon({
-      iconUrl: "img/ArtMuseum.png",
-      iconSize: [35, 35],
+      iconUrl: "img/museumMarker.png",
+      iconSize: [50, 55],
     });
     //// icon for ART_MUSEUM=====================================
     //---------------------------------------------------------------------//
 
     //// icon for HISTORY_MUSEUM=====================================
-    let historyMuseumIcon = L.icon({
-      iconUrl: "img/historyMuseum.png",
-      iconSize: [35, 35],
+    let performingArtsVenue = L.icon({
+      iconUrl: "img/performingVenueMarker.png",
+      iconSize: [40, 55],
     });
     //// icon for HISTORY_MUSEUM=====================================
     //---------------------------------------------------------------------//
@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     function displayIcon(icons) {
       const display = {
         10027: artMuseumIcon,
-        10035: scienceMuseumIcon,
+        10035: performingArtsVenue,
         // 10030: historyMuseumIcon,
         // 10031: scienceMuseumIcon,
       };
@@ -113,8 +113,6 @@ window.addEventListener("DOMContentLoaded", async function () {
           let marker = L.marker([lat, lng], {
             icon: displayIcon(dropdownValue),
           }).addTo(markerClusterLayer);
-          // marker.bindPopup(`<h1>${r.name}</h1>`)
-
           let hideResult = document.querySelector("#results");
 
           hideResult.addEventListener("click", function () {
@@ -155,26 +153,22 @@ window.addEventListener("DOMContentLoaded", async function () {
             // console.log(data + "tftftfu");
             async function getPicture() {
               let photos = await getPhoto(r.fsq_id);
-              let firstPhoto = photos[0];
-              // console.log(firstPhoto);
-              if (firstPhoto == undefined) {
-                el.innerHTML += " Sorry no photo";
+              el.innerHTML += `<div class="card ">`;
+              if (photos.length) {
+                let firstPhoto = photos[0];
+                let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
+
+                el.innerHTML += `<img src="${url}" class="card-img-top" alt="...">`;
+              } else {
+                el.innerHTML += `<img src="/img/notavailable.png" class="card-img-top" alt="...">`;
               }
-              let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
-              // if(url == "")
-              // {
-              //   el.innerHTML += "No image found";
-              // }
-              // if (r.location.formatted_address == undefined) {
-              //   el.innerHTML += "Addess not updated";
-              // }
+
+              // el.innerHTML += `<img src="${url}" class="card-img-top" alt="...">`;
+
               el.innerHTML += `
-              <div class="card "  >
-                <img src="${url}" class="card-img-top" alt="...">
                   <div class="card-body m-0 p-0">
                     <h6 class="card-title">${r.name}</h6>
                     <p class="card-text">${r.location.address}</p>
-                    <a href="#" class="btn btn-primary p-1">Go somewhere</a>
                   </div>
               </div>
               `;
@@ -203,6 +197,8 @@ window.addEventListener("DOMContentLoaded", async function () {
               [r.geocodes.main.latitude, r.geocodes.main.longitude],
               16
             );
+            markerClusterLayer.zoomToShowLayer(marker);
+
             marker.openPopup(); // show the bind popup for the marker
           });
 
