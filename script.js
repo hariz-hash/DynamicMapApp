@@ -115,18 +115,11 @@ window.addEventListener("DOMContentLoaded", async function () {
           let marker = L.marker([lat, lng], {
             icon: displayIcon(dropdownValue),
           }).addTo(markerClusterLayer);
-          let hideResult = document.querySelector("#results");
-
-          hideResult.addEventListener("click", function () {
-            let hidden = (hideResult.style.display = "none");
-
-            //results
-          });
 
           marker.bindPopup(function () {
             let el = document.createElement("div");
             // add the 'popup' class to the <div>
-
+            //
             // see style.css for its definition
             el.classList.add("popup");
             el.classList.add("img");
@@ -194,12 +187,15 @@ window.addEventListener("DOMContentLoaded", async function () {
           // and it is not a global variable (i.e it's the local variable of another scope)
           // therefore the created anoymous function will remember for itself what 'r'
           // stores when it is created. (Also known as a closure)
+
           resultElement.addEventListener("click", function () {
+
+            markerClusterLayer.zoomToShowLayer(marker);
+
             map.flyTo(
               [r.geocodes.main.latitude, r.geocodes.main.longitude],
               16
             );
-            markerClusterLayer.zoomToShowLayer(marker);
 
             marker.openPopup(); // show the bind popup for the marker
           });
@@ -207,12 +203,6 @@ window.addEventListener("DOMContentLoaded", async function () {
           searchResultElement.appendChild(resultElement);
         }
       });
-    let collapseElementList = [].slice.call(
-      document.querySelectorAll(".collapse")
-    );
-    let collapseList = collapseElementList.map(function (collapseEl) {
-      return new bootstrap.Collapse(collapseEl);
-    });
 
     // WEATHER ============================================================================================
 

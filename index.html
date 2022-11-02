@@ -122,6 +122,29 @@
           </select>
 
           <div id="results"></div>
+          <div class="mb-1 d-flex justify-content-center">
+            <!-- This button combines the search and collapse function -->
+            <button
+              class="btn btn-light"
+              value="search"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              Minimize Resutlrs
+            </button>
+          </div>
+          <div class="collapse" id="collapseExample">
+            <div
+              class="card card-body"
+              style="padding: 0%; background-color: #2d4620"
+            >
+              <div id="display-search" class="search-peri"></div>
+            </div>
+          </div>
+          <div>Minimize Results</div>
         </div>
 
         <div

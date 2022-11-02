@@ -45,7 +45,7 @@ async function getPlaceDetails(fsq_id) {
   return response.data;
 }
 
-async function displayNearBusStation(ll, category) {
+async function displayNearBusStation(ll) {
   let url = API_BASE_URL + "search";
   let response = await axios.get(url, {
     headers: headers,
