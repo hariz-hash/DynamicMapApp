@@ -25,17 +25,7 @@ window.addEventListener("DOMContentLoaded", async function () {
       iconUrl: "img/performingVenueMarker.png",
       iconSize: [40, 55],
     });
-    //// icon for HISTORY_MUSEUM=====================================
-    //---------------------------------------------------------------------//
 
-    //// icon for SCIENCE_MUSEUM=====================================
-    let scienceMuseumIcon = L.icon({
-      iconUrl: "img/scienceMuseum.png",
-      iconSize: [35, 35],
-    });
-    //// icon for SCIENCE_MUSEUM=====================================
-    //---------------------------------------------------------------------//
-    //12=========================================================================================
     function displayIcon(icons) {
       const display = {
         10027: artMuseumIcon,
@@ -99,9 +89,13 @@ window.addEventListener("DOMContentLoaded", async function () {
         // }
 
         // console.log(`asd${searchTerms}asd`);
+
         let searchResults = await search(latLng, searchTerms, dropdownValue);
+        console.log(searchResults);
+
         let displayNearByMrt = await displayNearBusStation(latLng);
         console.log(displayNearByMrt);
+
         let searchResultElement = document.querySelector("#results");
         searchResultElement.innerHTML = "";
 
@@ -176,6 +170,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
             return el;
           });
+          //add event listenr to close the result
 
           // add to the search results
           let resultElement = document.createElement("div");
@@ -193,12 +188,15 @@ window.addEventListener("DOMContentLoaded", async function () {
           // stores when it is created. (Also known as a closure)
 
           resultElement.addEventListener("click", function () {
+            //function to close result ----------------<> instantly close
             map.flyTo(
               [r.geocodes.main.latitude, r.geocodes.main.longitude],
-              16
+              18
             );
-
+            //set timeout by second
+            //delay below
             marker.openPopup(); // show the bind popup for the marker
+            //function to after ----------------<> instantly close
           });
 
           searchResultElement.appendChild(resultElement);

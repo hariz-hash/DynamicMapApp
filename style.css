@@ -13,7 +13,6 @@
   z-index: 30000;
   width: 300px;
   height: auto;
-  padding: 50px;
   /* width: 300px; */
   /* margin-top: 20px;
   margin-left: 20px; */
@@ -30,7 +29,7 @@
   padding-right: 10px; */
   /* height: 80%; */
   /* display: none; */
-  border-radius: 0px 0px 30px 30px;
+  /* border-radius: 0px 0px 30px 30px; */
   color: yellow;
   /* opacity: 96%; */
 }
@@ -197,9 +196,17 @@ input:focus {
   color: #fab700;
 } */
 
-.tab-nav a:hover {
-  border-color: black;
+.nav-tabs .nav-item .nav-link {
+  background-color: black;
+  color: #fab700;
 }
-.tab-nav {
+.nav-tabs .nav-item .nav-link {
+  background-color: black;
+  color: #fab700;
+}
+
+.nav-tabs .nav-item .nav-link.active {
   background-color: #fab700;
+  color: black;
+  border-color: #fab700;
 }

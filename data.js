@@ -60,4 +60,6 @@ async function displayNearBusStation(ll) {
       v: "20210903", // (Unique FourSquare) YYMMDD format (its for version control). I want to use your version of API dated before this date
     },
   });
+
+  return response.data;
 }
