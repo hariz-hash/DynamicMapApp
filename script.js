@@ -97,10 +97,10 @@ window.addEventListener("DOMContentLoaded", async function () {
         // console.log(`asd${searchTerms}asd`);
 
         let searchResults = await search(latLng, searchTerms, dropdownValue);
-        console.log(searchResults);
+        // console.log(searchResults);
 
         let displayNearByMrt = await displayNearBusStation(latLng);
-        console.log(displayNearByMrt);
+        console.log(displayNearByMrt.results);
 
         searchResultElement.innerHTML = "";
 
@@ -116,10 +116,12 @@ window.addEventListener("DOMContentLoaded", async function () {
           }).addTo(markerClusterLayer);
 
           marker.bindPopup(function () {
+            searchResultElement.style.display = "none";
+            map.flyTo(
+              [r.geocodes.main.latitude, r.geocodes.main.longitude],
+              20
+            );
             let el = document.createElement("div");
-            // add the 'popup' class to the <div>
-
-            // see style.css for its definition
             el.classList.add("popup");
             el.classList.add("img");
             el.classList.add("card");
@@ -202,25 +204,53 @@ window.addEventListener("DOMContentLoaded", async function () {
         }
       });
 
-    let checkedMrt = document.querySelector("#mrtStations");
+    // let checkedMrt = document.querySelector("#mrtStations");
     // console.log(checkedMrt);
-    checkedMrt.addEventListener("change", function () {
-      if (this.checked) {
-        alert("checked");
-      } else {
-        alert("not checked");
-      }
-    });
+    // document
+    //   .querySelector("#mrtStations")
+    //   .addEventListener("change", function () {
+    //     let selectedBox = document.querySelector("#mrtStations").value;
+    //     if (this.checked) {
+    //       for (let r of displayNearByMrt.results) {
+    //         let lat = r.geocodes.main.latitude;
+    //         let lng = r.geocodes.main.longitude;
 
-    // var checkbox = document.querySelector("input[name=checkbox]");
+    //         let marker = L.marker([lat, lng], {
+    //           icon: displayIcon(dropdownValue),
+    //         }).addTo(markerClusterLayer);
 
-    // checkbox.addEventListener('change', function() {
-    //   if (this.checked) {
-    //     console.log("Checkbox is checked..");
-    //   } else {
-    //     console.log("Checkbox is not checked..");
-    //   }
-    // });
+    //         marker.bindPopup(function () {
+    //           let el = document.createElement("div");
+    //           el.classList.add("popup");
+    //           el.classList.add("img");
+    //           // el.classList.add("card");
+    //           return el;
+    //         });
+
+    //         let resultElement = document.createElement("div");
+    //         resultElement.innerText = r.name;
+    //         resultElement.classList.add("search-result");
+
+    //         resultElement.addEventListener("click", function () {
+    //           map.flyTo(
+    //             [r.geocodes.main.latitude, r.geocodes.main.longitude],
+    //             20
+    //           );
+    //           markerClusterLayer.zoomToShowLayer(marker, function () {
+    //             marker.openPopup();
+    //           });
+
+    //           searchResultElement.style.display = "none";
+    //         });
+
+    //         searchResultElement.appendChild(resultElement);
+    //       }
+
+    //       // alert(selectedBox);
+    //     } else {
+    //       alert("not checked");
+    //     }
+    //   });
 
     // WEATHER ============================================================================================
 
