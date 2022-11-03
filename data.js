@@ -52,7 +52,7 @@ async function displayNearBusStation(ll) {
     params: {
       ll: ll,
       query: "mrt",
-      radius: 1000,
+      radius: 3000,
       categories: "19047", // ok for category to be empty string
       limit: 50,
       // ne: "1.41,103.93",

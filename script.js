@@ -17,12 +17,13 @@ window.addEventListener("DOMContentLoaded", async function () {
       iconUrl: "img/museumMarker.png",
       iconSize: [50, 55],
     });
-    //// icon for ART_MUSEUM=====================================
-    //---------------------------------------------------------------------//
 
-    //// icon for HISTORY_MUSEUM=====================================
     let performingArtsVenue = L.icon({
       iconUrl: "img/performingVenueMarker.png",
+      iconSize: [40, 55],
+    });
+    let trainLogo = L.icon({
+      iconUrl: "img/train_logo.png",
       iconSize: [40, 55],
     });
 
@@ -30,6 +31,7 @@ window.addEventListener("DOMContentLoaded", async function () {
       const display = {
         10027: artMuseumIcon,
         10035: performingArtsVenue,
+        19047: trainLogo,
         // 10030: historyMuseumIcon,
         // 10031: scienceMuseumIcon,
       };
@@ -64,8 +66,12 @@ window.addEventListener("DOMContentLoaded", async function () {
     document
       .querySelector("#btnSearch")
       .addEventListener("click", async function () {
-        // remove all the existing markers first before adding the new ones
         markerClusterLayer.clearLayers();
+        let searchResultElement = document.querySelector("#results");
+
+        if (searchResultElement.style.display == "none") {
+          searchResultElement.style.display = "block";
+        }
 
         let searchTerms = document.querySelector("#searchTerm").value.trim();
         let boundaries = map.getBounds();
@@ -96,7 +102,6 @@ window.addEventListener("DOMContentLoaded", async function () {
         let displayNearByMrt = await displayNearBusStation(latLng);
         console.log(displayNearByMrt);
 
-        let searchResultElement = document.querySelector("#results");
         searchResultElement.innerHTML = "";
 
         for (let r of searchResults.results) {
@@ -132,14 +137,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             //       searchContainerElement.style.display = "none";
             //     }
             //   });
-            // el.innerHTML = `
-            // <div class="card-body">
-            //   <h5 class="card-title">${r.name}</h5>
-            //   <h5 class="card-title">${r.location.formatted_address}</h5>
-            //   <h5 class="card-title">${r.website}</h5>
 
-            //   `;
-            // console.log(data + "tftftfu");
             async function getPicture() {
               let photos = await getPhoto(r.fsq_id);
               el.innerHTML += `<div class="card ">`;
@@ -165,13 +163,9 @@ window.addEventListener("DOMContentLoaded", async function () {
 
             getPicture();
 
-            // let resultt = sendGetRequest(lat, lng);
-            // console.log(resultt);
-
             return el;
           });
           //add event listenr to close the result
-
           // add to the search results
           let resultElement = document.createElement("div");
           resultElement.innerText = r.name;
@@ -188,20 +182,45 @@ window.addEventListener("DOMContentLoaded", async function () {
           // stores when it is created. (Also known as a closure)
 
           resultElement.addEventListener("click", function () {
-            //function to close result ----------------<> instantly close
+            //closes the  result
+            // searchResultElement.style.display = "none";
+
             map.flyTo(
               [r.geocodes.main.latitude, r.geocodes.main.longitude],
-              18
+              20
             );
             //set timeout by second
-            //delay below
-            marker.openPopup(); // show the bind popup for the marker
+            markerClusterLayer.zoomToShowLayer(marker, function () {
+              marker.openPopup();
+            });
+            // marker.openPopup(); // show the bind popup for the marker
             //function to after ----------------<> instantly close
+            searchResultElement.style.display = "none";
           });
 
           searchResultElement.appendChild(resultElement);
         }
       });
+
+    let checkedMrt = document.querySelector("#mrtStations");
+    // console.log(checkedMrt);
+    checkedMrt.addEventListener("change", function () {
+      if (this.checked) {
+        alert("checked");
+      } else {
+        alert("not checked");
+      }
+    });
+
+    // var checkbox = document.querySelector("input[name=checkbox]");
+
+    // checkbox.addEventListener('change', function() {
+    //   if (this.checked) {
+    //     console.log("Checkbox is checked..");
+    //   } else {
+    //     console.log("Checkbox is not checked..");
+    //   }
+    // });
 
     // WEATHER ============================================================================================
 
@@ -231,22 +250,6 @@ window.addEventListener("DOMContentLoaded", async function () {
         "https://api.openweathermap.org/img/w/" + icon + ".png";
 
       document.querySelector(".humidity").innerText = humidity;
-
-      // console.log(temp);
-      // console.log(resp.data);
-      // console.log(resp.data.weather[0].description);
-      // console.log(resp.data.weather[0].main);
-      // console.log(resp.data.weather[0].icon);
-
-      // console.log("temp " + );
-      // console.log("temp " + resp.data.main.temp);
-
-      // console.log("temp_min " + resp.data.main.temp_min);
-      // console.log("temp_max " + resp.data.main.temp_max);
-      // console.log("humidity " + resp.data.main.humidity);
-      // console.log("humidity " + resp.data.name);
-
-      // document.querySelector(".displayWeather").innerText ;
     }
 
     sendGetRequest();
