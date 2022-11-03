@@ -82,7 +82,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         let center = boundaries.getCenter(); // in lat lng
         let latLng = center.lat + "," + center.lng;
         let dropdownValue = "";
-        dropdownValue = document.getElementById("select1").value;
+        dropdownValue = document.getElementById("category").value;
         // document.getElementById("select1").addEventListener("change", function () {
         //     dropdownValue = this.value
         // });
@@ -119,7 +119,7 @@ window.addEventListener("DOMContentLoaded", async function () {
           marker.bindPopup(function () {
             let el = document.createElement("div");
             // add the 'popup' class to the <div>
-            //
+
             // see style.css for its definition
             el.classList.add("popup");
             el.classList.add("img");
@@ -181,6 +181,10 @@ window.addEventListener("DOMContentLoaded", async function () {
           let resultElement = document.createElement("div");
           resultElement.innerText = r.name;
           resultElement.classList.add("search-result");
+          // resultElement.classList.add("mt-2");
+          // resultElement.classList.add("mb-2");
+
+          // resultElement.classList.add("p-1");
 
           // the second parameter is an anonymous function
           // inside its scope, we refer to `r` which is not is own local variable
@@ -189,9 +193,6 @@ window.addEventListener("DOMContentLoaded", async function () {
           // stores when it is created. (Also known as a closure)
 
           resultElement.addEventListener("click", function () {
-
-            markerClusterLayer.zoomToShowLayer(marker);
-
             map.flyTo(
               [r.geocodes.main.latitude, r.geocodes.main.longitude],
               16

@@ -54,14 +54,126 @@
       class="container p-2 position-absolute top-0 start-0"
       id="containersearch"
     >
+      <nav class="tab-nav bg-black ms-0 me-0 p-0">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="search-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#search"
+              type="button"
+              role="tab"
+              aria-controls="search"
+              aria-selected="true"
+            >
+              Search
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="weather-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#weather"
+              type="button"
+              role="tab"
+              aria-controls="weather"
+              aria-selected="false"
+            >
+              Weather
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="Mrt-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#Mrt"
+              type="button"
+              role="tab"
+              aria-controls="Mrt"
+              aria-selected="false"
+            >
+              Mrt
+            </button>
+          </li>
+
+          <a
+            class="nav-link fa-solid fa-caret-down"
+            id="caretdown-tab"
+            data-bs-toggle="collapse"
+            data-bs-target=".tab-content"
+            aria-controls="caretdown"
+            aria-selected="false"
+          ></a>
+        </ul>
+      </nav>
+      <!-- id="myTabContent" -->
+      <div class="tab-content bg-black ps-2 pe-2 pt-2 pb-1 collapse show">
+        <div
+          class="tab-pane fade show active"
+          id="search"
+          role="tabpanel"
+          aria-labelledby="search-tab"
+        >
+          <div class="input-group mb-3 my-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="search Museums or Venues"
+              aria-describedby="button-addon2"
+              id="searchTerm"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="btnSearch"
+            >
+              Button
+            </button>
+            <select id="category" class="my-3" style="width: 280px">
+              <option name="museum" value="10027">Museum</option>
+              <option name="museum" value="10035">Performing Arts Venue</option>
+            </select>
+            <div id="results"></div>
+          </div>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="weather"
+          role="tabpanel"
+          aria-labelledby="weather-tab"
+        >
+          <div class="weatherbackground">
+            <div class="container weatherDisplay">
+              <div class="country"></div>
+              <div class="temp"></div>
+              <img src="" alt="" class="icon" />
+              <div class="description"></div>
+              <div class="humidity"></div>
+            </div>
+          </div>
+
+          <!--afasaf-->
+        </div>
+        <div
+          class="tab-pane fade"
+          id="Mrt"
+          role="tabpanel"
+          aria-labelledby="Mrt-tab"
+        >
+          Mrt
+        </div>
+      </div>
+
       <!-------------------------- nav of tab bar----------------------->
-      <nav class="tabback bg-black">
+      <!-- <nav class="tabback bg-black">
         <div
           class="nav nav-tabs p-0 position-relative"
           id="nav-tab"
           role="tablist"
         >
-          <!--tab bar link-->
           <a
             class="nav-link active pe-1 ps-1"
             id="nav-home-tab"
@@ -94,13 +206,13 @@
           >
 
           <i class="fa-solid fa-caret-down"></i>
-          <!--tab bar link-->
+         
         </div>
-      </nav>
+      </nav> -->
       <!-- nav of tab bar-->
 
       <!-------------------------------------navcontent-------------------------->
-      <div class="tab-content bg-dark" id="nav-tabContent">
+      <!-- <div class="tab-content bg-dark" id="nav-tabContent">
         <div
           class="tab-pane fade show active"
           id="nav-home"
@@ -123,7 +235,6 @@
 
           <div id="results"></div>
           <div class="mb-1 d-flex justify-content-center">
-            <!-- This button combines the search and collapse function -->
             <button
               class="btn btn-light"
               value="search"
@@ -153,7 +264,6 @@
           role="tabpanel"
           aria-labelledby="nav-profile-tab"
         >
-          <!-- -----------------------WEATHER ----------------->
           <div class="weatherbackground">
             <div class="container weatherDisplay">
               <div class="country"></div>
@@ -164,9 +274,8 @@
             </div>
             <!-- <div id="description"></div>
             <div id="temp"></div>
-            <div id="location"></div> -->
+            <div id="location"></div> 
           </div>
-          <!-- -----------------------WEATHER ----------------->
         </div>
 
         <div
@@ -179,7 +288,7 @@
           <p>clicked contact</p>
           <p>clicked contact</p>
         </div>
-      </div>
+      </div> -->
       <!-------------------------------------navcontent-------------------------->
     </div>
     <div id="map"></div>

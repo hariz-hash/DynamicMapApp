@@ -11,7 +11,7 @@
   /* position: absolute; */
   /* top: 2%; */
   z-index: 30000;
-  width: auto;
+  width: 300px;
   height: auto;
   padding: 50px;
   /* width: 300px; */
@@ -39,13 +39,12 @@
   max-height: 130px;
   max-width: 280px;
   overflow-y: scroll;
-  background-color: #121212;
-  border-radius: 15px;
+  background-color: #212121;
 }
 
-.search-result {
+/* .search-result {
   margin: 5px;
-}
+} */
 
 /* #btnToggleSearch {
   position: absolute;
@@ -89,28 +88,22 @@
 .btn {
   background-color: #fab700;
   color: white;
-  /* padding: 10px; */
-  /* padding-right: 8px; */
-  /* padding-top: 10px;
-  padding-bottom: 0px; */
 }
 
-input[type="text"],
+/* input[type="text"],
 textarea {
   background-color: #212121;
   border: 6px white;
-}
-
+} */
+/* 
 input {
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
-  border-bottom-style: groove;
+  border-bottom-style: hidden;
   border-color: #fab700;
-  /* background-color: ; */
   height: 38px;
-  /* padding-top: 1px; */
-  /* border-radius: 10px; */
+
 }
 
 .no-outline:focus {
@@ -121,17 +114,17 @@ input::placeholder {
   color: #fab700;
   opacity: 50%;
 }
-
-input,
+*/
+/* input,
 select,
 textarea {
   color: #fab700;
-}
-
+} */
+/*
 textarea:focus,
 input:focus {
   color: #fab700;
-}
+} */
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup.tip {
@@ -183,13 +176,30 @@ input:focus {
   border: 0px;
 }
 
-.search {
+/* .search {
   position: absolute;
   z-index: 30000;
-}
+} */
 
 .weatherbackground {
   background-color: #212121;
   color: #fab700;
   padding: 5px;
+}
+
+/* input[type="text"]:focus:not([readonly]) + label {
+  color: #fab700;
+  background-color: #212121;
+} */
+
+/* input[type="text"]:focus:not([readonly]) {
+  background-color: #212121;
+  color: #fab700;
+} */
+
+.tab-nav a:hover {
+  border-color: black;
+}
+.tab-nav {
+  background-color: #fab700;
 }
