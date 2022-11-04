@@ -5,9 +5,12 @@ window.addEventListener("DOMContentLoaded", async function () {
     // // add a layer to store the search results
     // let searchResultLayer = L.layerGroup();
     // searchResultLayer.addTo(map);
-
+    // diff
+    // one layer for museum , mrt and venues
     let markerClusterLayer = L.markerClusterGroup(); // <-- only available because we included the marker cluster JS file
     markerClusterLayer.addTo(map);
+    let mrtlayer = L.markerClusterGroup(); // <-- only available because we included the marker cluster JS file
+    mrtlayer.addTo(map);
     // icon for ART_MUSEUM=====================================
     let artMuseumIcon = L.icon({
       iconUrl: "img/museumMarker.png",
@@ -119,7 +122,10 @@ window.addEventListener("DOMContentLoaded", async function () {
 
           marker.bindPopup(function () {
             console.log(
-              "This is in markerbindpopup button" + latMarker + " " + lngMarker
+              "This is in markerbindpopup in search button" +
+                latMarker +
+                " " +
+                lngMarker
             );
 
             searchResultElement.style.display = "none";
@@ -192,7 +198,8 @@ window.addEventListener("DOMContentLoaded", async function () {
           resultElement.addEventListener("click", function () {
             //closes the  result
             // searchResultElement.style.display = "none";
-
+            latMarker = r.geocodes.main.latitude;
+            lngMarker = r.geocodes.main.longitude;
             map.flyTo(
               [r.geocodes.main.latitude, r.geocodes.main.longitude],
               20
@@ -212,65 +219,43 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     //CheckBox============================================================================
     // 1.334083697683275, 103.73569304032719;
+    // document.querySelector("#mrtstations").checked = false;
     document
       .querySelector("#mrtStations")
       .addEventListener("change", async function () {
-        let mrtChecked = document.querySelector("#mrtStations").value;
-        latLongMarker = latMarker + "," + lngMarker;
-        let displayNearByMrt = await displayNearByMrtStations(latLongMarker);
-        console.log(displayNearByMrt.results);
-        console.log(mrtChecked);
-        for (let r of displayNearByMrt.results) {
-          let marker = L.marker([latMarker, lngMarker], {
-            icon: displayIcon(mrtChecked),
-          }).addTo(markerClusterLayer);
+        if (document.querySelector("#mrtStations").checked) {
+          mrtlayer.clearLayers();
+          let mrtChecked = document.querySelector("#mrtStations").value;
+          latLongMarker = latMarker + "," + lngMarker;
+          let displayNearByMrt = await displayNearByMrtStations(latLongMarker);
+          console.log(displayNearByMrt.results);
+          console.log(mrtChecked);
 
-          marker.bindPopup(function () {
+          for (let r of displayNearByMrt.results) {
+            console.log(r.geocodes.main.latitude, r.geocodes.main.longitude);
+            let marker = L.marker(
+              [r.geocodes.main.latitude, r.geocodes.main.longitude],
+              {
+                icon: displayIcon(mrtChecked),
+              }
+            ).addTo(mrtlayer);
+
             console.log(
-              "This is in markerbindpopup for mrt button" +
+              "This is in markerbindpopup in checked button" +
                 latMarker +
-                "," +
+                " " +
                 lngMarker
             );
-
-            searchResultElement.style.display = "none";
+          }
+          if (displayNearByMrt.results.length) {
             map.flyTo(
-              [r.geocodes.main.latitude, r.geocodes.main.longitude],
-              20
+              [
+                displayNearByMrt.results[0].geocodes.main.latitude,
+                displayNearByMrt.results[0].geocodes.main.longitude,
+              ],
+              15
             );
-
-            let el = document.createElement("div");
-            el.classList.add("popup");
-            el.classList.add("img");
-            el.classList.add("card");
-
-            async function getPicture() {
-              let photos = await getPhoto(r.fsq_id);
-              el.innerHTML += `<div class="card ">`;
-              if (photos.length) {
-                let firstPhoto = photos[0];
-                let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
-
-                el.innerHTML += `<img src="${url}" class="card-img-top" alt="...">`;
-              } else {
-                el.innerHTML += `<img src="/img/notavailable.png" class="card-img-top" alt="...">`;
-              }
-
-              // el.innerHTML += `<img src="${url}" class="card-img-top" alt="...">`;
-
-              el.innerHTML += `
-                  <div class="card-body m-0 p-0">
-                    <h6 class="card-title">${r.name}</h6>
-                    <p class="card-text">${r.location.address}</p>
-                  </div>
-              </div>
-              `;
-            }
-
-            getPicture();
-
-            return el;
-          });
+          }
         }
       });
     //CheckBox============================================================================
@@ -280,7 +265,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     //------------=====================================================================---------------------------------------------------//
 
     // WEATHER ============================================================================================
-
+// show result list for mrts
     async function sendGetRequest() {
       // https://api.openweathermap.org/data/2.5/weather?q=singapore&appid=a7d4412c5faff421f4d323e4648b95a0&units=metric
       const API_WEATHER_URL =
