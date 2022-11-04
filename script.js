@@ -1,14 +1,10 @@
-// Use DOMContentLoaded as our main entry point
-
 window.addEventListener("DOMContentLoaded", async function () {
-  // this function is to setup the application
-
   function init() {
     let map = initMap();
 
-    // add a layer to store the search results
-    let searchResultLayer = L.layerGroup();
-    searchResultLayer.addTo(map);
+    // // add a layer to store the search results
+    // let searchResultLayer = L.layerGroup();
+    // searchResultLayer.addTo(map);
 
     let markerClusterLayer = L.markerClusterGroup(); // <-- only available because we included the marker cluster JS file
     markerClusterLayer.addTo(map);
@@ -32,12 +28,20 @@ window.addEventListener("DOMContentLoaded", async function () {
         10027: artMuseumIcon,
         10035: performingArtsVenue,
         19047: trainLogo,
-        // 10030: historyMuseumIcon,
-        // 10031: scienceMuseumIcon,
       };
       return display[icons];
     }
+    //map boundries
+    let boundaries = map.getBounds();
+    let center = boundaries.getCenter(); // in lat lng
+    let latLng = center.lat + "," + center.lng;
+    //map boundries
 
+    //marker latlong locations
+    let latMarker = 0;
+    let lngMarker = 0;
+    let latLongMarker = "";
+    //markerlatlong locations
     // document
     //   .querySelector("#btnToggleSearch")
     //   .addEventListener("click", function () {
@@ -74,9 +78,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         }
 
         let searchTerms = document.querySelector("#searchTerm").value.trim();
-        let boundaries = map.getBounds();
-        let center = boundaries.getCenter(); // in lat lng
-        let latLng = center.lat + "," + center.lng;
+
         let dropdownValue = "";
         dropdownValue = document.getElementById("category").value;
         // document.getElementById("select1").addEventListener("change", function () {
@@ -97,10 +99,9 @@ window.addEventListener("DOMContentLoaded", async function () {
         // console.log(`asd${searchTerms}asd`);
 
         let searchResults = await search(latLng, searchTerms, dropdownValue);
-        // console.log(searchResults);
+        console.log("This is in search button" + latLng);
 
-        let displayNearByMrt = await displayNearBusStation(latLng);
-        console.log(displayNearByMrt.results);
+        // console.log(searchResults);
 
         searchResultElement.innerHTML = "";
 
@@ -108,14 +109,19 @@ window.addEventListener("DOMContentLoaded", async function () {
           // console.log(searchResults.results);
 
           // Display the marker
-          let lat = r.geocodes.main.latitude;
-          let lng = r.geocodes.main.longitude;
+          latMarker = r.geocodes.main.latitude;
+          lngMarker = r.geocodes.main.longitude;
+          console.log(typeof latMarker);
 
-          let marker = L.marker([lat, lng], {
+          let marker = L.marker([latMarker, lngMarker], {
             icon: displayIcon(dropdownValue),
           }).addTo(markerClusterLayer);
 
           marker.bindPopup(function () {
+            console.log(
+              "This is in markerbindpopup button" + latMarker + " " + lngMarker
+            );
+
             searchResultElement.style.display = "none";
             map.flyTo(
               [r.geocodes.main.latitude, r.geocodes.main.longitude],
@@ -204,53 +210,74 @@ window.addEventListener("DOMContentLoaded", async function () {
         }
       });
 
-    // let checkedMrt = document.querySelector("#mrtStations");
-    // console.log(checkedMrt);
-    // document
-    //   .querySelector("#mrtStations")
-    //   .addEventListener("change", function () {
-    //     let selectedBox = document.querySelector("#mrtStations").value;
-    //     if (this.checked) {
-    //       for (let r of displayNearByMrt.results) {
-    //         let lat = r.geocodes.main.latitude;
-    //         let lng = r.geocodes.main.longitude;
+    //CheckBox============================================================================
+    // 1.334083697683275, 103.73569304032719;
+    document
+      .querySelector("#mrtStations")
+      .addEventListener("change", async function () {
+        let mrtChecked = document.querySelector("#mrtStations").value;
+        latLongMarker = latMarker + "," + lngMarker;
+        let displayNearByMrt = await displayNearByMrtStations(latLongMarker);
+        console.log(displayNearByMrt.results);
+        console.log(mrtChecked);
+        for (let r of displayNearByMrt.results) {
+          let marker = L.marker([latMarker, lngMarker], {
+            icon: displayIcon(mrtChecked),
+          }).addTo(markerClusterLayer);
 
-    //         let marker = L.marker([lat, lng], {
-    //           icon: displayIcon(dropdownValue),
-    //         }).addTo(markerClusterLayer);
+          marker.bindPopup(function () {
+            console.log(
+              "This is in markerbindpopup for mrt button" +
+                latMarker +
+                "," +
+                lngMarker
+            );
 
-    //         marker.bindPopup(function () {
-    //           let el = document.createElement("div");
-    //           el.classList.add("popup");
-    //           el.classList.add("img");
-    //           // el.classList.add("card");
-    //           return el;
-    //         });
+            searchResultElement.style.display = "none";
+            map.flyTo(
+              [r.geocodes.main.latitude, r.geocodes.main.longitude],
+              20
+            );
 
-    //         let resultElement = document.createElement("div");
-    //         resultElement.innerText = r.name;
-    //         resultElement.classList.add("search-result");
+            let el = document.createElement("div");
+            el.classList.add("popup");
+            el.classList.add("img");
+            el.classList.add("card");
 
-    //         resultElement.addEventListener("click", function () {
-    //           map.flyTo(
-    //             [r.geocodes.main.latitude, r.geocodes.main.longitude],
-    //             20
-    //           );
-    //           markerClusterLayer.zoomToShowLayer(marker, function () {
-    //             marker.openPopup();
-    //           });
+            async function getPicture() {
+              let photos = await getPhoto(r.fsq_id);
+              el.innerHTML += `<div class="card ">`;
+              if (photos.length) {
+                let firstPhoto = photos[0];
+                let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
 
-    //           searchResultElement.style.display = "none";
-    //         });
+                el.innerHTML += `<img src="${url}" class="card-img-top" alt="...">`;
+              } else {
+                el.innerHTML += `<img src="/img/notavailable.png" class="card-img-top" alt="...">`;
+              }
 
-    //         searchResultElement.appendChild(resultElement);
-    //       }
+              // el.innerHTML += `<img src="${url}" class="card-img-top" alt="...">`;
 
-    //       // alert(selectedBox);
-    //     } else {
-    //       alert("not checked");
-    //     }
-    //   });
+              el.innerHTML += `
+                  <div class="card-body m-0 p-0">
+                    <h6 class="card-title">${r.name}</h6>
+                    <p class="card-text">${r.location.address}</p>
+                  </div>
+              </div>
+              `;
+            }
+
+            getPicture();
+
+            return el;
+          });
+        }
+      });
+    //CheckBox============================================================================
+    //------------=====================================================================---------------------------------------------------//
+    //------------=====================================================================---------------------------------------------------//
+    //------------=====================================================================---------------------------------------------------//
+    //------------=====================================================================---------------------------------------------------//
 
     // WEATHER ============================================================================================
 
@@ -283,9 +310,8 @@ window.addEventListener("DOMContentLoaded", async function () {
     }
 
     sendGetRequest();
-
-    // WEATHER ============================================================================================
   }
+  // WEATHER ============================================================================================
 
   init();
 });
