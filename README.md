@@ -3,6 +3,7 @@
 ## Summary
 
 ArtSG is a web application with an interactive map feature that allows users to explore the various location around Singapore.
+Link to demo : [arstsg](https://6367308c193dc17221e9c71d--ornate-rolypoly-478d4e.netlify.app)
 
 ---
 
