@@ -1,57 +1,103 @@
 #map {
   height: 100vh;
+  /* background-color: yellow; */
+  /* filter: hue-rotate(0deg); */
 }
 
-/* .containe-fluid {
-  position: relative;
-} */
-
-#containersearch {
-  /* background-color: #212121; */
-  /* position: absolute; */
-  /* top: 2%; */
-  z-index: 30000;
-  width: 300px;
-  height: auto;
-  /* width: 300px; */
-  /* margin-top: 20px;
-  margin-left: 20px; */
-  /* height: 200px; */
-  /* left: 50px; */
-
-  /* the height container, depending on its content, can be more than 25px. 
-    But when it has no content, it has to be 25px */
-  /* min-height: 100px; */
-  /* overflow: hidden; */
-  /* height: 97%; */
-  /* height: 200px; */
-  /* padding-left: 10px;
-  padding-right: 10px; */
-  /* height: 80%; */
-  /* display: none; */
-  /* border-radius: 0px 0px 30px 30px; */
+/* General css for common */
+.btn {
+  background-color: #212121;
   color: yellow;
-  /* opacity: 96%; */
+  border-color: yellow;
+}
+.btn:hover {
+  background-color: yellow;
+  color: #212121;
 }
 
-#results {
-  max-height: 130px;
-  max-width: 280px;
-  overflow-y: scroll;
+/* list of the dropwdown css */
+.dropdown-menu {
   background-color: #212121;
 }
+.dropdown-item {
+  color: yellow;
+}
+.dropdown-item:hover {
+  background-color: yellow;
+  color: #212121;
+}
+.dropdown-item:focus {
+  background-color: yellow;
+  color: #212121;
+}
 
-/* .search-result {
-  margin: 5px;
-} */
+/* Tab navigation link css */
+.nav {
+  background-color: #212121;
+  border-color: #212121;
+}
+.nav-item {
+  background-color: #212121;
+  color: yellow;
+}
+.nav-tabs .nav-link {
+  color: yellow;
+}
+.nav-tabs .nav-item .nav-link.active {
+  background-color: yellow;
+  color: #212121;
+}
+.nav-tabs .nav-item .nav-link:hover {
+  background-color: yellow;
+  color: #212121;
+  transition: 0.7s;
+  opacity: 80%;
+}
+/* Tab content css */
+.tab-content {
+  background-color: #212121;
+}
+.transportation {
+  background-color: #212121;
+  color: yellow;
+}
+/*container for whole tab css*/
+#containerTab {
+  width: 400px;
+  height: auto;
+  z-index: 30000;
+  opacity: 98%;
+}
 
-/* #btnToggleSearch {
-  position: absolute;
-  left: 50px;
-  top: 10px;
-  z-index: 300000;
-} */
+/* Dropdownlist css*/
 
+#category {
+  border-color: yellow;
+  background-color: #212121;
+  color: yellow;
+  border-radius: 6px;
+}
+#category:hover {
+  background-color: yellow;
+  color: #212121;
+}
+.showCategoryName {
+  background-color: #212121;
+  color: yellow;
+}
+
+/* Result list css*/
+.resultsDisplay {
+  border-color: yellow;
+  background-color: #212121;
+  border-color: yellow;
+  color: yellow;
+  max-height: 130px;
+  max-width: auto;
+  overflow-y: scroll;
+}
+
+/*MARKER BIND POP UP CSS*/
 .popup {
   /* overflow: scroll; */
   width: 200px;
@@ -61,113 +107,13 @@
   border-color: #212121;
   color: #fab700;
 }
-
 .popup img {
   height: 100px;
 }
 
-@media (min-width: 767px) {
-  /* because the div is a block-level element, so we use display: block */
-  #search-container {
-    display: block;
-    left: 5%;
-  }
-
-  #btnToggleSearch {
-    display: none;
-  }
-}
-
-/* input[type="button"] {
-  background: rgba(0, 0, 0, 0);
-  border: none;
-  outline: none;
-} */
-
-.btn {
-  background-color: #fab700;
-  color: white;
-}
-
-/* input[type="text"],
-textarea {
-  background-color: #212121;
-  border: 6px white;
-} */
-/* 
-input {
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: hidden;
-  border-color: #fab700;
-  height: 38px;
-
-}
-
-.no-outline:focus {
-  outline: none;
-}
-
-input::placeholder {
-  color: #fab700;
-  opacity: 50%;
-}
-*/
-/* input,
-select,
-textarea {
-  color: #fab700;
-} */
-/*
-textarea:focus,
-input:focus {
-  color: #fab700;
-} */
-
 .leaflet-popup-content-wrapper,
 .leaflet-popup.tip {
   background-color: #212121;
-}
-
-/* .searchbox
-{
-  padding-top:10px;
-  padding-bottom:30px;
-} */
-/*
-.d-flex
-{
-    
-}
-*/
-
-.my-tab .tab-pane {
-  border: solid 1px blue;
-}
-
-#nav-home-tab:focus {
-  background-color: #fab700;
-  color: white;
-  border-color: #fab700;
-}
-
-#nav-profile-tab:focus {
-  background-color: #fab700;
-  color: white;
-  border-color: #fab700;
-}
-
-#nav-home-tab .nav-item .nav-link.active {
-  color: #0080ff;
-}
-
-.nav-tabs .nav-link {
-  color: white;
-}
-
-.nav-tabs .nav-item .nav-link.active {
-  background-color: pink;
 }
 
 .card {
@@ -175,38 +121,152 @@ input:focus {
   border: 0px;
 }
 
-/* .search {
-  position: absolute;
-  z-index: 30000;
-} */
-
 .weatherbackground {
   background-color: #212121;
-  color: #fab700;
+  color: yellow;
   padding: 5px;
 }
 
-/* input[type="text"]:focus:not([readonly]) + label {
-  color: #fab700;
-  background-color: #212121;
-} */
+/* LOGO*/
 
-/* input[type="text"]:focus:not([readonly]) {
-  background-color: #212121;
-  color: #fab700;
-} */
-
-.nav-tabs .nav-item .nav-link {
-  background-color: black;
-  color: #fab700;
+.logo {
+  z-index: 30000;
+  width: 200;
+  height: 200px;
 }
-.nav-tabs .nav-item .nav-link {
-  background-color: black;
-  color: #fab700;
+img {
+  width: 140px;
+  height: 140px;
+}
+.buttonMenu {
+  z-index: 30000;
 }
 
-.nav-tabs .nav-item .nav-link.active {
-  background-color: #fab700;
-  color: black;
-  border-color: #fab700;
+.menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  opacity: 98%;
+
+  top: 0;
+  left: 0;
+  background-color: #212121;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 10px;
+  cursor: arrow;
+  z-index: 3000;
+}
+.menuBtnClose {
+  transition: 0.1;
+}
+
+.menu a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: yellow;
+  display: block;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  color: #212121;
+  transition: 0.5s;
+  background-color: yellow;
+}
+
+.menu .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .menu {
+    padding-top: 15px;
+  }
+  .menu a {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  /* And even smaller */
+  #containerTab {
+    width: 300px;
+    height: auto;
+    z-index: 30000;
+    opacity: 98%;
+    margin-right: 74px;
+  }
+  .nav-tabs .nav-link {
+    padding: 5px;
+  }
+  .tab-content {
+    padding: 0px;
+  }
+  .input-group {
+    padding: 0px;
+  }
+  .dropdown-item {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .menu {
+    height: 100%;
+
+    background-color: #212121;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+    cursor: arrow;
+    z-index: 3000;
+  }
+  .menuBtnClose {
+    transition: 0.1;
+  }
+
+  .menu a {
+    padding: 0px;
+    text-decoration: none;
+    font-size: 20px;
+    color: yellow;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .menu a:hover {
+    color: #212121;
+    transition: 0.5s;
+    background-color: yellow;
+  }
+
+  .menu .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+}
+
+.logoCrown {
+  width: 65px;
+  height: 50px;
+}
+
+.modal-content {
+  background-color: #212121;
+  color: yellow;
+}
+
+@media screen and (max-width: 412px) {
+  .modal-content {
+    margin-top: 250px;
+    padding: 20px;
+  }
 }

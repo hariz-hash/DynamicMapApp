@@ -2,15 +2,18 @@ window.addEventListener("DOMContentLoaded", async function () {
   function init() {
     let map = initMap();
 
-    // // add a layer to store the search results
-    // let searchResultLayer = L.layerGroup();
-    // searchResultLayer.addTo(map);
-    // diff
-    // one layer for museum , mrt and venues
-    let markerClusterLayer = L.markerClusterGroup(); // <-- only available because we included the marker cluster JS file
+    let markerClusterLayer = L.markerClusterGroup();
     markerClusterLayer.addTo(map);
-    let mrtlayer = L.markerClusterGroup(); // <-- only available because we included the marker cluster JS file
+
+    let mrtlayer = L.markerClusterGroup();
     mrtlayer.addTo(map);
+
+    let circleForTrain = L.layerGroup();
+    circleForTrain.addTo(map);
+
+    let foodCourtLayer = L.layerGroup();
+    foodCourtLayer.addTo(map);
+
     // icon for ART_MUSEUM=====================================
     let artMuseumIcon = L.icon({
       iconUrl: "img/museumMarker.png",
@@ -23,7 +26,12 @@ window.addEventListener("DOMContentLoaded", async function () {
     });
     let trainLogo = L.icon({
       iconUrl: "img/train_logo.png",
-      iconSize: [40, 55],
+      iconSize: [30, 35],
+    });
+
+    let foodLogo = L.icon({
+      iconUrl: "img/crownblack.png",
+      iconSize: [30, 35],
     });
 
     function displayIcon(icons) {
@@ -44,38 +52,12 @@ window.addEventListener("DOMContentLoaded", async function () {
     let latMarker = 0;
     let lngMarker = 0;
     let latLongMarker = "";
-    //markerlatlong locations
-    // document
-    //   .querySelector("#btnToggleSearch")
-    //   .addEventListener("click", function () {
-    //     let searchContainerElement =
-    //       document.querySelector("#search-container");
-    //     let currentDisplay = searchContainerElement.style.display;
-    //     if (!currentDisplay || currentDisplay == "none") {
-    //       // if it is not visible
-    //       searchContainerElement.style.display = "block";
-    //     } else {
-    //       searchContainerElement.style.display = "none";
-    //     }
-    //   });
-
-    // document.querySelector("#RadioBtnShow").addEventListener("click", function () {
-    //   let radioButtonElement = document.querySelector(".p-2");
-    //   if (radioButtonElement.style.display == "none") {
-    //     // if it is not visible
-    //     radioButtonElement.style.display = "block";
-    //   } else {
-    //     radioButtonElement.style.display = "none";
-    //   }
-    // });
-    // let currentWeather = sendGetRequest("1.3521","103.8198");
 
     document
       .querySelector("#btnSearch")
       .addEventListener("click", async function () {
         markerClusterLayer.clearLayers();
         let searchResultElement = document.querySelector("#results");
-
         if (searchResultElement.style.display == "none") {
           searchResultElement.style.display = "block";
         }
@@ -83,34 +65,14 @@ window.addEventListener("DOMContentLoaded", async function () {
         let searchTerms = document.querySelector("#searchTerm").value.trim();
 
         let dropdownValue = "";
-        dropdownValue = document.getElementById("category").value;
-        // document.getElementById("select1").addEventListener("change", function () {
-        //     dropdownValue = this.value
-        // });
-
-        // console.log(dropdownValue);
-
-        // SEARCH MUSEUM only
-        // let museum = document.querySelectorAll(".museum");
-        // let valueBtn = "";
-        // for (let rb of museum) {
-        //   if (rb.checked) {
-        //     valueBtn = rb.value;
-        //   }
-        // }
-
-        // console.log(`asd${searchTerms}asd`);
+        dropdownValue = document.querySelector("#category").value;
 
         let searchResults = await search(latLng, searchTerms, dropdownValue);
         console.log("This is in search button" + latLng);
 
-        // console.log(searchResults);
-
         searchResultElement.innerHTML = "";
 
         for (let r of searchResults.results) {
-          // console.log(searchResults.results);
-
           // Display the marker
           latMarker = r.geocodes.main.latitude;
           lngMarker = r.geocodes.main.longitude;
@@ -138,20 +100,6 @@ window.addEventListener("DOMContentLoaded", async function () {
             el.classList.add("img");
             el.classList.add("card");
 
-            // document
-            //   .querySelector("#btnToggleSearch")
-            //   .addEventListener("click", function () {
-            //     let searchContainerElement =
-            //       document.querySelector("#search-container");
-            //     let currentDisplay = searchContainerElement.style.display;
-            //     if (!currentDisplay || currentDisplay == "none") {
-            //       // if it is not visible
-            //       searchContainerElement.style.display = "block";
-            //     } else {
-            //       searchContainerElement.style.display = "none";
-            //     }
-            //   });
-
             async function getPicture() {
               let photos = await getPhoto(r.fsq_id);
               el.innerHTML += `<div class="card ">`;
@@ -163,8 +111,6 @@ window.addEventListener("DOMContentLoaded", async function () {
               } else {
                 el.innerHTML += `<img src="/img/notavailable.png" class="card-img-top" alt="...">`;
               }
-
-              // el.innerHTML += `<img src="${url}" class="card-img-top" alt="...">`;
 
               el.innerHTML += `
                   <div class="card-body m-0 p-0">
@@ -184,20 +130,8 @@ window.addEventListener("DOMContentLoaded", async function () {
           let resultElement = document.createElement("div");
           resultElement.innerText = r.name;
           resultElement.classList.add("search-result");
-          // resultElement.classList.add("mt-2");
-          // resultElement.classList.add("mb-2");
-
-          // resultElement.classList.add("p-1");
-
-          // the second parameter is an anonymous function
-          // inside its scope, we refer to `r` which is not is own local variable
-          // and it is not a global variable (i.e it's the local variable of another scope)
-          // therefore the created anoymous function will remember for itself what 'r'
-          // stores when it is created. (Also known as a closure)
 
           resultElement.addEventListener("click", function () {
-            //closes the  result
-            // searchResultElement.style.display = "none";
             latMarker = r.geocodes.main.latitude;
             lngMarker = r.geocodes.main.longitude;
             map.flyTo(
@@ -218,13 +152,13 @@ window.addEventListener("DOMContentLoaded", async function () {
       });
 
     //CheckBox============================================================================
-    // 1.334083697683275, 103.73569304032719;
-    // document.querySelector("#mrtstations").checked = false;
+
     document
       .querySelector("#mrtStations")
       .addEventListener("change", async function () {
+        mrtlayer.clearLayers();
+        circleForTrain.clearLayers();
         if (document.querySelector("#mrtStations").checked) {
-          mrtlayer.clearLayers();
           let mrtChecked = document.querySelector("#mrtStations").value;
           latLongMarker = latMarker + "," + lngMarker;
           let displayNearByMrt = await displayNearByMrtStations(latLongMarker);
@@ -240,13 +174,66 @@ window.addEventListener("DOMContentLoaded", async function () {
               }
             ).addTo(mrtlayer);
 
+            marker.bindPopup(function () {
+              // console.log(
+              //   "This is in markerbindpopup in search button" +
+              //     latMarker +
+              //     " " +
+              //     lngMarker
+              // );
+
+              map.flyTo(
+                [r.geocodes.main.latitude, r.geocodes.main.longitude],
+                20
+              );
+              let el = document.createElement("div");
+              el.classList.add("popup");
+              el.classList.add("img");
+              el.classList.add("card");
+
+              async function getPicture() {
+                let photos = await getPhoto(r.fsq_id);
+                el.innerHTML += `<div class="card ">`;
+                if (photos.length) {
+                  let firstPhoto = photos[0];
+                  let url = firstPhoto.prefix + "original" + firstPhoto.suffix;
+
+                  el.innerHTML += `<img src="${url}" class="card-img-top" alt="...">`;
+                } else {
+                  el.innerHTML += `<img src="/img/notavailable.png" class="card-img-top" alt="...">`;
+                }
+
+                el.innerHTML += `
+                    <div class="card-body m-0 p-0">
+                      <h6 class="card-title">${r.name}</h6>
+                      <p class="card-text">${r.location.address}</p>
+                    </div>
+                </div>
+                `;
+              }
+
+              getPicture();
+
+              return el;
+            });
             console.log(
               "This is in markerbindpopup in checked button" +
                 latMarker +
                 " " +
                 lngMarker
             );
+            let circle = L.circle(
+              [r.geocodes.main.latitude, r.geocodes.main.longitude],
+              {
+                color: "yellow", // just the line color
+                fillColor: "black", // background color,
+                fillOpacity: 0.5,
+                radius: 500, // in metres
+              }
+            );
+            circle.addTo(circleForTrain);
           }
+
           if (displayNearByMrt.results.length) {
             map.flyTo(
               [
@@ -259,14 +246,11 @@ window.addEventListener("DOMContentLoaded", async function () {
         }
       });
     //CheckBox============================================================================
-    //------------=====================================================================---------------------------------------------------//
-    //------------=====================================================================---------------------------------------------------//
-    //------------=====================================================================---------------------------------------------------//
-    //------------=====================================================================---------------------------------------------------//
 
     // WEATHER ============================================================================================
-// show result list for mrts
-    async function sendGetRequest() {
+    // show result list for mrts
+
+    async function getWeather() {
       // https://api.openweathermap.org/data/2.5/weather?q=singapore&appid=a7d4412c5faff421f4d323e4648b95a0&units=metric
       const API_WEATHER_URL =
         "https://api.openweathermap.org/data/2.5/weather?q=singapore";
@@ -294,9 +278,33 @@ window.addEventListener("DOMContentLoaded", async function () {
       document.querySelector(".humidity").innerText = humidity;
     }
 
-    sendGetRequest();
+    getWeather();
+    // WEATHER ============================================================================================
+
+    document
+      .querySelector(".menuBtn")
+      .addEventListener("click", async function () {
+        document.querySelector(".menu").style.width = "180px";
+        let checkVisibleButton = document.querySelector(".menuBtn");
+        if (checkVisibleButton.style.display == "none") {
+          checkVisibleButton.style.display = "block";
+        } else {
+          checkVisibleButton.style.display = "none";
+        }
+      });
+
+    document
+      .querySelector(".menuBtnClose")
+      .addEventListener("click", async function () {
+        document.querySelector(".menu").style.width = "0";
+        let checkVisibleButton = document.querySelector(".menuBtn");
+        if (checkVisibleButton.style.display == "none") {
+          checkVisibleButton.style.display = "block";
+        } else {
+          checkVisibleButton.style.display = "none";
+        }
+      });
   }
-  // WEATHER ============================================================================================
 
   init();
 });
@@ -310,7 +318,7 @@ function initMap() {
   });
   L.control
     .zoom({
-      position: "bottomleft",
+      position: "bottomright",
     })
     .addTo(map);
   // set the center point and the zoom

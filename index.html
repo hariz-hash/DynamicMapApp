@@ -12,7 +12,6 @@
       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
       crossorigin=""
     />
-
     <!-- leaflet clustering css-->
     <link
       rel="stylesheet"
@@ -22,14 +21,14 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
     />
-
+    <!--bootstrap cdn-->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
-    <!-- my own css-->
+    <!--FONTAWESOME-->
     <link rel="stylesheet" href="
     <link
       rel=" stylesheet"
@@ -45,84 +44,93 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- personal css-->
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
-    <!-- <button id="btnToggleSearch">Toggle Search</button> -->
+    <!-- navigation for tabs-->
+    <!-- <nav class="bg-black ms-0 me-0 p-0"> -->
+
     <div
-      class="container p-2 position-absolute top-0 start-0"
-      id="containersearch"
+      class="container p-0 position-absolute top-0 end-0 m-sm-0"
+      id="containerTab"
     >
-      <nav class="bg-black ms-0 me-0 p-0">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link active"
-              id="search-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#search"
-              type="button"
-              role="tab"
-              aria-controls="search"
-              aria-selected="true"
-            >
-              Search
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="weather-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#weather"
-              type="button"
-              role="tab"
-              aria-controls="weather"
-              aria-selected="false"
-            >
-              Weather
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="Mrt-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#Mrt"
-              type="button"
-              role="tab"
-              aria-controls="Mrt"
-              aria-selected="false"
-            >
-              Mrt
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a
-              class="nav-link fa-solid fa-caret-down m-1"
-              id="caretdown-tab"
-              data-bs-toggle="collapse"
-              data-bs-target=".tab-content"
-              aria-controls="caretdown"
-              aria-selected="false"
-            ></a>
-          </li>
-        </ul>
-      </nav>
-      <!-- id="myTabContent" -->
-      <div class="tab-content bg-black ps-2 pe-2 pt-2 pb-1 collapse show">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li>
+          <img src="img/crownCurvedYellow.png" class="logoCrown" alt="" />
+        </li>
+        <!--Search tab-->
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active rounded-0"
+            id="search-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#search"
+            type="button"
+            role="tab"
+            aria-controls="search"
+            aria-selected="true"
+          >
+            Search
+          </button>
+        </li>
+        <!--Weather tab-->
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link rounded-0"
+            id="weather-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#weather"
+            type="button"
+            role="tab"
+            aria-controls="weather"
+            aria-selected="false"
+          >
+            Weather
+          </button>
+        </li>
+        <!--Mrt tab-->
+        <li class="nav-item " role="presentation">
+          <button
+            class="nav-link rounded-0"
+            id="Mrt-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#Mrt"
+            type="button"
+            role="tab"
+            aria-controls="Mrt"
+            aria-selected="false"
+          >
+            Mrt
+          </button>
+        </li>
+        <!--toggle tab to close tabcontent-->
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link fa-solid fa-caret-down m-1"
+            id="caretdown"
+            data-bs-toggle="collapse"
+            data-bs-target=".tab-content"
+            aria-controls="caretdown"
+            aria-selected="false"
+          ></a>
+        </li>
+      </ul>
+      <!-- for tab content -->
+      <div class="tab-content collapse show py-2">
+        <!-- tab content for search contains saerch box and search button-->
         <div
           class="tab-pane fade show active"
           id="search"
           role="tabpanel"
           aria-labelledby="search-tab"
         >
-          <div class="input-group mb-3 my-3">
+          <div class="input-group ps-3 pe-3 my-3">
             <input
               type="text"
               class="form-control"
-              placeholder="search Museums or Venues"
+              placeholder="Search"
+              aria-label="Recipient's username"
               aria-describedby="button-addon2"
               id="searchTerm"
             />
@@ -131,17 +139,26 @@
               type="button"
               id="btnSearch"
             >
-              Button
+              Search
             </button>
-            <select id="category" class="my-3" style="width: 280px">
-              <option name="museum" value="10027">Museum</option>
-              <option name="museum" value="10035">Performing Arts Venue</option>
-            </select>
-            <div id="results"></div>
           </div>
+          <!--Dropdown list-->
+          <div class="dropdown ps-3 pe-3 my-3">
+            <select id="category" class="p-1 w-100">
+              <option hidden>Choose a category</option>
+              <option name="category" class="showCategoryName" value="10027">
+                Museum
+              </option>
+              <option name="category" class="showCategoryName" value="10035">
+                Performing Arts Venue
+              </option>
+            </select>
+          </div>
+          <div id="results" class="resultsDisplay ps-3 pe-3 my-3"></div>
         </div>
+        <!-- tab content for weather-->
         <div
-          class="tab-pane fade"
+          class="tab-pane fade p-2"
           id="weather"
           role="tabpanel"
           aria-labelledby="weather-tab"
@@ -149,25 +166,23 @@
           <div class="weatherbackground">
             <div class="container weatherDisplay">
               <div class="country"></div>
-              <div class="temp"></div>
-              <img src="" alt="" class="icon" />
+            Temperature:  <div class="temp"></div>
+              <img src="" alt="" class="icon w-20" />
               <div class="description"></div>
-              <div class="humidity"></div>
+              Humidity:<div class="humidity"></div>
             </div>
           </div>
 
           <!--afasaf-->
         </div>
+        <!-- tab content for MRT-->
         <div
-          class="tab-pane fade"
+          class="tab-pane transportation fade"
           id="Mrt"
           role="tabpanel"
           aria-labelledby="Mrt-tab"
         >
           <div class="form-check">
-            <!-- <input type="checkbox" id="scales" name="scales" checked />
-            <label for="scales">Scales</label> -->
-
             <input
               class="form-check-input"
               type="checkbox"
@@ -179,132 +194,67 @@
           </div>
         </div>
       </div>
-
-      <!-------------------------- nav of tab bar----------------------->
-      <!-- <nav class="tabback bg-black">
-        <div
-          class="nav nav-tabs p-0 position-relative"
-          id="nav-tab"
-          role="tablist"
-        >
-          <a
-            class="nav-link active pe-1 ps-1"
-            id="nav-home-tab"
-            data-bs-toggle="tab"
-            href="#nav-home"
-            role="tab"
-            aria-controls="nav-home"
-            aria-selected="true"
-            >Search</a
-          >
-          <a
-            class="nav-link pe-1 ps-1"
-            id="nav-profile-tab"
-            data-bs-toggle="tab"
-            href="#nav-profile"
-            role="tab"
-            aria-controls="nav-profile"
-            aria-selected="false"
-            >Weather</a
-          >
-          <a
-            class="nav-link pe-1 ps-1"
-            id="nav-contact-tab"
-            data-bs-toggle="tab"
-            href="#nav-contact"
-            role="tab"
-            aria-controls="nav-contact"
-            aria-selected="false"
-            >Others</a
-          >
-
-          <i class="fa-solid fa-caret-down"></i>
-         
-        </div>
-      </nav> -->
-      <!-- nav of tab bar-->
-
-      <!-------------------------------------navcontent-------------------------->
-      <!-- <div class="tab-content bg-dark" id="nav-tabContent">
-        <div
-          class="tab-pane fade show active"
-          id="nav-home"
-          role="tabpanel"
-          aria-labelledby="nav-home-tab"
-        >
-          <div class="inputButton">
-            <input
-              type="text"
-              class="no-outline"
-              id="searchTerm"
-              placeholder="Search.."
-            />
-            <button id="btnSearch" class="btn">Search</button>
-          </div>
-          <select id="select1" style="width: 280px">
-            <option name="museum" value="10027">Museum</option>
-            <option name="museum" value="10035">Performing Arts Venue</option>
-          </select>
-
-          <div id="results"></div>
-          <div class="mb-1 d-flex justify-content-center">
-            <button
-              class="btn btn-light"
-              value="search"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseExample"
-              aria-expanded="false"
-              aria-controls="collapseExample"
-            >
-              Minimize Resutlrs
-            </button>
-          </div>
-          <div class="collapse" id="collapseExample">
-            <div
-              class="card card-body"
-              style="padding: 0%; background-color: #2d4620"
-            >
-              <div id="display-search" class="search-peri"></div>
-            </div>
-          </div>
-          <div>Minimize Results</div>
-        </div>
-
-        <div
-          class="tab-pane fade"
-          id="nav-profile"
-          role="tabpanel"
-          aria-labelledby="nav-profile-tab"
-        >
-          <div class="weatherbackground">
-            <div class="container weatherDisplay">
-              <div class="country"></div>
-              <div class="temp"></div>
-              <img src="" alt="" class="icon" />
-              <div class="description"></div>
-              <div class="humidity"></div>
-            </div>
-            <!-- <div id="description"></div>
-            <div id="temp"></div>
-            <div id="location"></div> 
-          </div>
-        </div>
-
-        <div
-          class="tab-pane fade"
-          id="nav-contact"
-          role="tabpanel"
-          aria-labelledby="nav-contact-tab"
-        >
-          <p>clicked contact</p>
-          <p>clicked contact</p>
-          <p>clicked contact</p>
-        </div>
-      </div> -->
-      <!-------------------------------------navcontent-------------------------->
     </div>
     <div id="map"></div>
+    <!-- <div class="logo position-absolute top-0 start-0">
+      <img src="/img/crownCurvedBlack2.png" alt="" />
+    </div> -->
+    <div class="buttonMenu position-absolute bottom-0 start-0">
+      <button
+        class="btn menuBtn m-4"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#myModal"
+      >
+        Login
+      </button>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Welcome to ArtsSg !</h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">Login</div>
+
+          <!-- Modal footer -->
+          <div class="input-group ps-3 pe-3 my-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              aria-label="Search"
+              aria-describedby="button-addon2"
+              id="searchTerm"
+            />
+          </div>
+          <div class="input-group ps-3 pe-3 my-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Email"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+              id="searchTerm"
+            />
+          </div>
+
+            <button type="button" class="btn btn-primary m-2">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </nav>
 
     <!-- axios-->
     <script
@@ -319,10 +269,17 @@
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""
     ></script>
+
     <!-- Leaflet Clustering-->
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
 
+    <script src="displayIcons.js"></script>
+
     <!-- our own data.js -->
+    <script src="SideNavigationBar.js"></script>
+
+    <script src="displayIcons.js"></script>
+
     <script src="data.js"></script>
     <!-- finally script.js -->
     <script src="script.js"></script>
